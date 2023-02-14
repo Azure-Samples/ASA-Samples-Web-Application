@@ -35,10 +35,7 @@ public interface ListsApi {
      * @return A Todo item result (status code 201)
      *         or Todo list not found (status code 404)
      */
-    @RequestMapping(
-        method = RequestMethod.POST,
-        value = "/lists/{listId}/items"
-    )
+    @PostMapping("/lists/{listId}/items")
     default ResponseEntity<TodoItem> createItem(
         @PathVariable("listId") String listId,
         @Valid @RequestBody(required = false) TodoItem todoItem) {
@@ -65,10 +62,7 @@ public interface ListsApi {
      * @return A Todo list result (status code 201)
      *         or Invalid request schema (status code 400)
      */
-    @RequestMapping(
-        method = RequestMethod.POST,
-        value = "/lists"
-    )
+    @PostMapping("/lists")
     default ResponseEntity<TodoList> createList(@Valid @RequestBody(required = false) TodoList todoList) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType : MediaType.parseMediaTypes(request.getHeader("Accept"))) {
@@ -93,10 +87,7 @@ public interface ListsApi {
      * @return Todo item deleted successfully (status code 204)
      *         or Todo list or item not found (status code 404)
      */
-    @RequestMapping(
-        method = RequestMethod.DELETE,
-        value = "/lists/{listId}/items/{itemId}"
-    )
+    @DeleteMapping("/lists/{listId}/items/{itemId}")
     default ResponseEntity<Void> deleteItemById(
         @PathVariable("listId") String listId, @PathVariable("itemId") String itemId) {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
@@ -111,10 +102,7 @@ public interface ListsApi {
      * @return Todo list deleted successfully (status code 204)
      *         or Todo list not found (status code 404)
      */
-    @RequestMapping(
-        method = RequestMethod.DELETE,
-        value = "/lists/{listId}"
-    )
+    @DeleteMapping("/lists/{listId}")
     default ResponseEntity<Void> deleteListById(@PathVariable("listId") String listId) {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
@@ -129,10 +117,7 @@ public interface ListsApi {
      *         or Todo list or item not found (status code 404)
      */
 
-    @RequestMapping(
-        method = RequestMethod.GET,
-        value = "/lists/{listId}/items/{itemId}"
-    )
+    @GetMapping("/lists/{listId}/items/{itemId}")
     default ResponseEntity<TodoItem> getItemById(
         @PathVariable("listId") String listId,
         @PathVariable("itemId") String itemId
@@ -163,10 +148,7 @@ public interface ListsApi {
      *         or Todo list not found (status code 404)
      */
 
-    @RequestMapping(
-        method = RequestMethod.GET,
-        value = "/lists/{listId}/items"
-    )
+    @GetMapping("/lists/{listId}/items")
     default ResponseEntity<List<TodoItem>> getItemsByListId(
         @PathVariable("listId") String listId,
         @Valid @RequestParam(value = "top", required = false, defaultValue = "20") BigDecimal top,
@@ -199,10 +181,7 @@ public interface ListsApi {
      *         or Todo list or item not found (status code 404)
      */
 
-    @RequestMapping(
-        method = RequestMethod.GET,
-        value = "/lists/{listId}/items/state/{state}"
-    )
+    @GetMapping("/lists/{listId}/items/state/{state}")
     default ResponseEntity<List<TodoItem>> getItemsByListIdAndState(
         @PathVariable("listId") String listId,
         @PathVariable("state") TodoState state,
@@ -233,10 +212,7 @@ public interface ListsApi {
      *         or Todo list not found (status code 404)
      */
 
-    @RequestMapping(
-        method = RequestMethod.GET,
-        value = "/lists/{listId}"
-    )
+    @GetMapping("/lists/{listId}")
     default ResponseEntity<TodoList> getListById(
         @PathVariable("listId") String listId
     ) {
@@ -294,10 +270,7 @@ public interface ListsApi {
      *         or Todo list or item not found (status code 404)
      */
 
-    @RequestMapping(
-        method = RequestMethod.PUT,
-        value = "/lists/{listId}/items/{itemId}"
-    )
+    @PutMapping("/lists/{listId}/items/{itemId}")
     default ResponseEntity<TodoItem> updateItemById(
         @PathVariable("listId") String listId,
         @PathVariable("itemId") String itemId,
@@ -329,9 +302,7 @@ public interface ListsApi {
      *         or Update request is invalid (status code 400)
      */
 
-    @PutMapping(
-        "/lists/{listId}/items/state/{state}"
-    )
+    @PutMapping("/lists/{listId}/items/state/{state}")
     default ResponseEntity<Void> updateItemsStateByListId(
         @PathVariable("listId") String listId,
         @PathVariable("state") TodoState state,
