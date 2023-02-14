@@ -8,7 +8,6 @@ import org.springframework.data.annotation.Id;
 import org.springframework.format.annotation.DateTimeFormat;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
-import io.swagger.v3.oas.annotations.media.Schema;
 
 
 import java.util.*;
@@ -18,7 +17,6 @@ import javax.annotation.Generated;
  * A task that needs to be completed
  */
 
-@Schema(name = "TodoItem", description = "A task that needs to be completed")
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen")
 public class TodoItem {
 
@@ -60,7 +58,6 @@ public class TodoItem {
    * @return id
    */
 
-  @Schema(name = "id", required = false)
   public UUID getId() {
     return id;
   }
@@ -79,7 +76,6 @@ public class TodoItem {
    * @return listId
    */
   @NotNull
-  @Schema(name = "listId", required = true)
   public UUID getListId() {
     return listId;
   }
@@ -98,7 +94,6 @@ public class TodoItem {
    * @return name
    */
   @NotNull
-  @Schema(name = "name", required = true)
   public String getName() {
     return name;
   }
@@ -117,7 +112,6 @@ public class TodoItem {
    * @return description
    */
   @NotNull
-  @Schema(name = "description", required = true)
   public String getDescription() {
     return description;
   }
@@ -136,7 +130,6 @@ public class TodoItem {
    * @return state
    */
   @Valid
-  @Schema(name = "state", required = false)
   public TodoState getState() {
     return state;
   }
@@ -155,7 +148,6 @@ public class TodoItem {
    * @return dueDate
    */
   @Valid
-  @Schema(name = "dueDate", required = false)
   public OffsetDateTime getDueDate() {
     return dueDate;
   }
@@ -174,7 +166,6 @@ public class TodoItem {
    * @return completedDate
    */
   @Valid
-  @Schema(name = "completedDate", required = false)
   public OffsetDateTime getCompletedDate() {
     return completedDate;
   }

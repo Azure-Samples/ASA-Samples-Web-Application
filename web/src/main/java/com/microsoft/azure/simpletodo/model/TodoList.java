@@ -3,7 +3,6 @@ package com.microsoft.azure.simpletodo.model;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import javax.validation.constraints.*;
-import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.data.annotation.Id;
 
 
@@ -14,7 +13,6 @@ import javax.annotation.Generated;
  *  A list of related Todo items
  */
 
-@Schema(name = "TodoList", description = " A list of related Todo items")
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen")
 public class TodoList {
 
@@ -38,7 +36,6 @@ public class TodoList {
    * @return id
    */
 
-  @Schema(name = "id", required = false)
   public UUID getId() {
     return id;
   }
@@ -57,7 +54,6 @@ public class TodoList {
    * @return name
    */
   @NotNull
-  @Schema(name = "name", required = true)
   public String getName() {
     return name;
   }
@@ -76,7 +72,6 @@ public class TodoList {
    * @return description
    */
 
-  @Schema(name = "description", required = false)
   public String getDescription() {
     return description;
   }
