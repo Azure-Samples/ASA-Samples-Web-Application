@@ -16,7 +16,6 @@ import java.math.BigDecimal;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @RestController
 public class TodoListsController implements ListsApi {
@@ -34,7 +33,7 @@ public class TodoListsController implements ListsApi {
     public ResponseEntity<TodoItem> createItem(String listId, TodoItem todoItem) {
         Optional<TodoList> optionalTodoList = todoListRepository.findById(listId);
         if (optionalTodoList.isPresent()) {
-            todoItem.setListId(UUID.fromString(listId));
+            todoItem.setListId(listId);
             TodoItem savedTodoItem = todoItemRepository.save(todoItem);
             URI location = ServletUriComponentsBuilder
                     .fromCurrentRequest()
@@ -151,7 +150,7 @@ public class TodoListsController implements ListsApi {
         Optional<TodoItem> optionalTodoItem = todoItemRepository.findById(itemId);
         if (optionalTodoItem.isPresent()) {
             TodoItem todoItem = optionalTodoItem.get();
-            if (todoItem.getListId().toString().equals(listId)) {
+            if (todoItem.getListId().equals(listId)) {
                 return Optional.of(todoItem);
             } else {
                 return Optional.empty();

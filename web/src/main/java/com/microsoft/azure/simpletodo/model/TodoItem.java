@@ -4,13 +4,16 @@ import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
 
-import org.springframework.data.annotation.Id;
+import org.hibernate.annotations.GenericGenerator;
 import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
 
 
-import java.util.*;
 import javax.annotation.Generated;
 
 /**
@@ -18,14 +21,17 @@ import javax.annotation.Generated;
  */
 
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen")
+@Entity
 public class TodoItem {
 
   @JsonProperty("id")
   @Id
-  private UUID id;
+  @GeneratedValue(generator="system-uuid")
+  @GenericGenerator(name="system-uuid", strategy = "uuid")
+  private String id;
 
   @JsonProperty("listId")
-  private UUID listId;
+  private String listId;
 
   @JsonProperty("name")
   private String name;
@@ -48,7 +54,7 @@ public class TodoItem {
     this.dueDate = OffsetDateTime.now();
   }
 
-  public TodoItem id(UUID id) {
+  public TodoItem id(String id) {
     this.id = id;
     return this;
   }
@@ -58,15 +64,15 @@ public class TodoItem {
    * @return id
    */
 
-  public UUID getId() {
+  public String getId() {
     return id;
   }
 
-  public void setId(UUID id) {
+  public void setId(String id) {
     this.id = id;
   }
 
-  public TodoItem listId(UUID listId) {
+  public TodoItem listId(String listId) {
     this.listId = listId;
     return this;
   }
@@ -76,11 +82,11 @@ public class TodoItem {
    * @return listId
    */
   @NotNull
-  public UUID getListId() {
+  public String getListId() {
     return listId;
   }
 
-  public void setListId(UUID listId) {
+  public void setListId(String listId) {
     this.listId = listId;
   }
 
