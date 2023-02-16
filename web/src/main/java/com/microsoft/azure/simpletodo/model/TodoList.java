@@ -2,11 +2,14 @@ package com.microsoft.azure.simpletodo.model;
 
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.validation.constraints.*;
-import org.springframework.data.annotation.Id;
 
 
-import java.util.*;
 import javax.annotation.Generated;
 
 /**
@@ -14,11 +17,14 @@ import javax.annotation.Generated;
  */
 
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen")
+@Entity
 public class TodoList {
 
   @JsonProperty("id")
   @Id
-  private UUID id;
+  @GeneratedValue(generator="system-uuid")
+  @GenericGenerator(name="system-uuid", strategy = "uuid")
+  private String id;
 
   @JsonProperty("name")
   private String name;
@@ -26,7 +32,7 @@ public class TodoList {
   @JsonProperty("description")
   private String description;
 
-  public TodoList id(UUID id) {
+  public TodoList id(String id) {
     this.id = id;
     return this;
   }
@@ -36,11 +42,11 @@ public class TodoList {
    * @return id
    */
 
-  public UUID getId() {
+  public String getId() {
     return id;
   }
 
-  public void setId(UUID id) {
+  public void setId(String id) {
     this.id = id;
   }
 
