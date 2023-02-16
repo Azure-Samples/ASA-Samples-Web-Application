@@ -21,7 +21,7 @@
     <java.version>17</java.version>
     <maven.compiler.source>${java.version}</maven.compiler.source>
     <maven.compiler.target>${java.version}</maven.compiler.target>
-    <spring-cloud-azure.version>4.5.0</spring-cloud-azure.version>
+    <spring-cloud-azure.version>4.6.0</spring-cloud-azure.version>
   </properties>
 
   <modules>
