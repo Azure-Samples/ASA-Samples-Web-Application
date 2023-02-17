@@ -2,7 +2,8 @@ package com.microsoft.azure.simpletodo.model;
 
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.hibernate.annotations.GenericGenerator;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,10 +22,10 @@ import javax.annotation.Generated;
 public class TodoList {
 
   @JsonProperty("id")
+  @JsonSerialize(using = ToStringSerializer.class)
   @Id
-  @GeneratedValue(generator="system-uuid")
-  @GenericGenerator(name="system-uuid", strategy = "uuid")
-  private String id;
+  @GeneratedValue
+  private Long id;
 
   @JsonProperty("name")
   private String name;
@@ -32,7 +33,7 @@ public class TodoList {
   @JsonProperty("description")
   private String description;
 
-  public TodoList id(String id) {
+  public TodoList id(Long id) {
     this.id = id;
     return this;
   }
@@ -42,11 +43,11 @@ public class TodoList {
    * @return id
    */
 
-  public String getId() {
+  public Long getId() {
     return id;
   }
 
-  public void setId(String id) {
+  public void setId(Long id) {
     this.id = id;
   }
 

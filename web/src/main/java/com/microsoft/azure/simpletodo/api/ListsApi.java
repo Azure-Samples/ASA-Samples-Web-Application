@@ -37,7 +37,7 @@ public interface ListsApi {
      */
     @PostMapping("/lists/{listId}/items")
     default ResponseEntity<TodoItem> createItem(
-        @PathVariable("listId") String listId,
+        @PathVariable("listId") Long listId,
         @Valid @RequestBody(required = false) TodoItem todoItem) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType : MediaType.parseMediaTypes(request.getHeader("Accept"))) {
@@ -89,7 +89,7 @@ public interface ListsApi {
      */
     @DeleteMapping("/lists/{listId}/items/{itemId}")
     default ResponseEntity<Void> deleteItemById(
-        @PathVariable("listId") String listId, @PathVariable("itemId") String itemId) {
+        @PathVariable("listId") Long listId, @PathVariable("itemId") Long itemId) {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
 
     }
@@ -103,7 +103,7 @@ public interface ListsApi {
      *         or Todo list not found (status code 404)
      */
     @DeleteMapping("/lists/{listId}")
-    default ResponseEntity<Void> deleteListById(@PathVariable("listId") String listId) {
+    default ResponseEntity<Void> deleteListById(@PathVariable("listId") Long listId) {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 
@@ -119,8 +119,8 @@ public interface ListsApi {
 
     @GetMapping("/lists/{listId}/items/{itemId}")
     default ResponseEntity<TodoItem> getItemById(
-        @PathVariable("listId") String listId,
-        @PathVariable("itemId") String itemId
+        @PathVariable("listId") Long listId,
+        @PathVariable("itemId") Long itemId
     ) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType : MediaType.parseMediaTypes(request.getHeader("Accept"))) {
@@ -150,7 +150,7 @@ public interface ListsApi {
 
     @GetMapping("/lists/{listId}/items")
     default ResponseEntity<List<TodoItem>> getItemsByListId(
-        @PathVariable("listId") String listId,
+        @PathVariable("listId") Long listId,
         @Valid @RequestParam(value = "top", required = false, defaultValue = "20") BigDecimal top,
         @Valid @RequestParam(value = "skip", required = false, defaultValue = "0") BigDecimal skip
     ) {
@@ -183,7 +183,7 @@ public interface ListsApi {
 
     @GetMapping("/lists/{listId}/items/state/{state}")
     default ResponseEntity<List<TodoItem>> getItemsByListIdAndState(
-        @PathVariable("listId") String listId,
+        @PathVariable("listId") Long listId,
         @PathVariable("state") TodoState state,
         @Valid @RequestParam(value = "top", required = false, defaultValue = "20") BigDecimal top,
         @Valid @RequestParam(value = "skip", required = false, defaultValue = "0") BigDecimal skip
@@ -214,7 +214,7 @@ public interface ListsApi {
 
     @GetMapping("/lists/{listId}")
     default ResponseEntity<TodoList> getListById(
-        @PathVariable("listId") String listId
+        @PathVariable("listId") Long listId
     ) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType : MediaType.parseMediaTypes(request.getHeader("Accept"))) {
@@ -272,8 +272,8 @@ public interface ListsApi {
 
     @PutMapping("/lists/{listId}/items/{itemId}")
     default ResponseEntity<TodoItem> updateItemById(
-        @PathVariable("listId") String listId,
-        @PathVariable("itemId") String itemId,
+        @PathVariable("listId") Long listId,
+        @PathVariable("itemId") Long itemId,
         @Valid @RequestBody(required = false) TodoItem todoItem
     ) {
         getRequest().ifPresent(request -> {
@@ -304,7 +304,7 @@ public interface ListsApi {
 
     @PutMapping("/lists/{listId}/items/state/{state}")
     default ResponseEntity<Void> updateItemsStateByListId(
-        @PathVariable("listId") String listId,
+        @PathVariable("listId") Long listId,
         @PathVariable("state") TodoState state,
         @Valid @RequestBody(required = false) List<String> requestBody
     ) {
@@ -324,7 +324,7 @@ public interface ListsApi {
 
     @PutMapping("/lists/{listId}")
     default ResponseEntity<TodoList> updateListById(
-        @PathVariable("listId") String listId,
+        @PathVariable("listId") Long listId,
         @Valid @RequestBody(required = false) TodoList todoList ) {
         getRequest().ifPresent(request -> {
             for (MediaType mediaType : MediaType.parseMediaTypes(request.getHeader("Accept"))) {
