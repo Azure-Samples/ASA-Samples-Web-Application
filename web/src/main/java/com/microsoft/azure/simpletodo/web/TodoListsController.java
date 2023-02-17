@@ -30,7 +30,7 @@ public class TodoListsController implements ListsApi {
     }
 
     @Override
-    public ResponseEntity<TodoItem> createItem(String listId, TodoItem todoItem) {
+    public ResponseEntity<TodoItem> createItem(Long listId, TodoItem todoItem) {
         Optional<TodoList> optionalTodoList = todoListRepository.findById(listId);
         if (optionalTodoList.isPresent()) {
             todoItem.setListId(listId);
@@ -58,7 +58,7 @@ public class TodoListsController implements ListsApi {
     }
 
     @Override
-    public ResponseEntity<Void> deleteItemById(String listId, String itemId) {
+    public ResponseEntity<Void> deleteItemById(Long listId, Long itemId) {
         Optional<TodoItem> todoItem = getTodoItem(listId, itemId);
         if (todoItem.isPresent()) {
             todoItemRepository.deleteById(itemId);
@@ -69,7 +69,7 @@ public class TodoListsController implements ListsApi {
     }
 
     @Override
-    public ResponseEntity<Void> deleteListById(String listId) {
+    public ResponseEntity<Void> deleteListById(Long listId) {
         Optional<TodoList> todoList = todoListRepository.findById(listId);
         if (todoList.isPresent()) {
             todoListRepository.deleteById(listId);
@@ -80,12 +80,12 @@ public class TodoListsController implements ListsApi {
     }
 
     @Override
-    public ResponseEntity<TodoItem> getItemById(String listId, String itemId) {
+    public ResponseEntity<TodoItem> getItemById(Long listId, Long itemId) {
         return getTodoItem(listId, itemId).map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @Override
-    public ResponseEntity<List<TodoItem>> getItemsByListId(String listId, BigDecimal top, BigDecimal skip) {
+    public ResponseEntity<List<TodoItem>> getItemsByListId(Long listId, BigDecimal top, BigDecimal skip) {
         Optional<TodoList> todoList = todoListRepository.findById(listId);
         if (todoList.isPresent()) {
             return ResponseEntity.ok(todoItemRepository.findByListId(listId, PageRequest.of(skip.intValue(), top.intValue())));
@@ -95,14 +95,14 @@ public class TodoListsController implements ListsApi {
     }
 
     @Override
-    public ResponseEntity<List<TodoItem>> getItemsByListIdAndState(String listId, TodoState state, BigDecimal top, BigDecimal skip) {
+    public ResponseEntity<List<TodoItem>> getItemsByListIdAndState(Long listId, TodoState state, BigDecimal top, BigDecimal skip) {
         return ResponseEntity.ok(
                 todoItemRepository
                         .findByListIdAndState(listId, state.name(), PageRequest.of(skip.intValue(), top.intValue())));
     }
 
     @Override
-    public ResponseEntity<TodoList> getListById(String listId) {
+    public ResponseEntity<TodoList> getListById(Long listId) {
         return todoListRepository.findById(listId).map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
@@ -118,7 +118,7 @@ public class TodoListsController implements ListsApi {
     }
 
     @Override
-    public ResponseEntity<TodoItem> updateItemById(String listId, String itemId, TodoItem todoItem) {
+    public ResponseEntity<TodoItem> updateItemById(Long listId, Long itemId, TodoItem todoItem) {
         return getTodoItem(listId, itemId).map(t -> {
             todoItemRepository.save(todoItem);
             return ResponseEntity.ok(todoItem);
@@ -126,7 +126,7 @@ public class TodoListsController implements ListsApi {
     }
 
     @Override
-    public ResponseEntity<Void> updateItemsStateByListId(String listId, TodoState state, List<String> requestBody) {
+    public ResponseEntity<Void> updateItemsStateByListId(Long listId, TodoState state, List<String> requestBody) {
         for (TodoItem todoItem : todoItemRepository.findByListId(listId)) {
             todoItem.state(state);
             todoItemRepository.save(todoItem);
@@ -135,14 +135,14 @@ public class TodoListsController implements ListsApi {
     }
 
     @Override
-    public ResponseEntity<TodoList> updateListById(String listId, TodoList todoList) {
+    public ResponseEntity<TodoList> updateListById(Long listId, TodoList todoList) {
         return todoListRepository
                 .findById(listId)
                 .map(t -> ResponseEntity.ok(todoListRepository.save(todoList)))
                 .orElseGet(() -> ResponseEntity.badRequest().build());
     }
 
-    private Optional<TodoItem> getTodoItem(String listId, String itemId) {
+    private Optional<TodoItem> getTodoItem(Long listId, Long itemId) {
         Optional<TodoList> optionalTodoList = todoListRepository.findById(listId);
         if (optionalTodoList.isEmpty()) {
             return Optional.empty();

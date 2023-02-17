@@ -8,11 +8,11 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface TodoItemRepository extends PagingAndSortingRepository<TodoItem, String> {
+public interface TodoItemRepository extends PagingAndSortingRepository<TodoItem, Long> {
 
-    List<TodoItem> findByListId(String listId);
+    List<TodoItem> findByListId(Long listId);
 
-    List<TodoItem> findByListId(String listId, Pageable pageable);
+    List<TodoItem> findByListId(Long listId, Pageable pageable);
 
-    List<TodoItem> findByListIdAndState(String listId, String state, Pageable pageable);
+    List<TodoItem> findByListIdAndState(Long listId, String state, Pageable pageable);
 }

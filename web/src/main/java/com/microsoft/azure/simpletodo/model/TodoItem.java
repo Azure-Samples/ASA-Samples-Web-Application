@@ -2,9 +2,10 @@ package com.microsoft.azure.simpletodo.model;
 
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import java.time.OffsetDateTime;
 
-import org.hibernate.annotations.GenericGenerator;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Entity;
@@ -25,13 +26,13 @@ import javax.annotation.Generated;
 public class TodoItem {
 
   @JsonProperty("id")
+  @JsonSerialize(using = ToStringSerializer.class)
   @Id
-  @GeneratedValue(generator="system-uuid")
-  @GenericGenerator(name="system-uuid", strategy = "uuid")
-  private String id;
+  @GeneratedValue
+  private Long id;
 
   @JsonProperty("listId")
-  private String listId;
+  private Long listId;
 
   @JsonProperty("name")
   private String name;
@@ -54,7 +55,7 @@ public class TodoItem {
     this.dueDate = OffsetDateTime.now();
   }
 
-  public TodoItem id(String id) {
+  public TodoItem id(Long id) {
     this.id = id;
     return this;
   }
@@ -64,15 +65,15 @@ public class TodoItem {
    * @return id
    */
 
-  public String getId() {
+  public Long getId() {
     return id;
   }
 
-  public void setId(String id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
-  public TodoItem listId(String listId) {
+  public TodoItem listId(Long listId) {
     this.listId = listId;
     return this;
   }
@@ -82,11 +83,11 @@ public class TodoItem {
    * @return listId
    */
   @NotNull
-  public String getListId() {
+  public Long getListId() {
     return listId;
   }
 
-  public void setListId(String listId) {
+  public void setListId(Long listId) {
     this.listId = listId;
   }
 
