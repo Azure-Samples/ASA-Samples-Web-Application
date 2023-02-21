@@ -39,4 +39,6 @@
     mvn spring-boot:run -f web/pom.xml
     ```
 
-5. Access `http://localhost:8080` by browser.
+5. Access `http://localhost:8080` by browser, you will see a page like this:
+
+> ![web.png](./assets/web.png)
