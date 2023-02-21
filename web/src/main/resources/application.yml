@@ -5,7 +5,8 @@ spring:
     password: ${POSTGRES_PASSWORD}
   jackson:
     date-format: com.microsoft.azure.simpletodo.configuration.RFC3339DateFormat
-    serialization: WRITE_DATES_AS_TIMESTAMPS=false
+    serialization: 
+      write-dates-as-timestamps: false
   jpa:
     generate-ddl: true
     hibernate:

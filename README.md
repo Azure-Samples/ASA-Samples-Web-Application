@@ -30,14 +30,13 @@
 3. Build sample project.
 
     ```shell
-    mvn package -DskipTests
+    mvn clean package -DskipTests
     ```
 
 4. Run sample project.
 
     ```shell
-    cd web
-    mvn spring-boot:run
+    mvn spring-boot:run -f web/pom.xml
     ```
 
 5. Access `http://localhost:8080` by browser.
