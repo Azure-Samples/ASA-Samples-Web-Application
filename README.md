@@ -1,57 +1,43 @@
-# Project Name
+# Azure Spring Apps Sample - Simple Todo App
 
-(short, 1-3 sentenced, description of the project)
+## Prerequisites
 
-## Features
+- Java 17 or later
+- Maven
+- Docker
 
-This project framework provides the following features:
+## Run The App
 
-* Feature 1
-* Feature 2
-* ...
+1. Prepare necessary environment variable.
 
-## Getting Started
+    ```shell
+    export POSTGRES_PASSWORD=mysecretpassword
+    ```
 
-### Prerequisites
+2. Start a PostgreSQL docker container.
 
-(ideally very short, if any)
+    ```shell
+    docker run \
+        --name todo-postgres \
+        -e POSTGRES_DB=postgres \
+        -e POSTGRES_USER=postgres \
+        -e POSTGRES_PASSWORD=${POSTGRES_PASSWORD} \
+        -d \
+        -p 5432:5432 \
+        postgres:11.19-alpine
+    ```
 
-- OS
-- Library version
-- ...
+3. Build sample project.
 
-### Installation
+    ```shell
+    mvn package -DskipTests
+    ```
 
-(ideally very short)
+4. Run sample project.
 
-- npm install [package name]
-- mvn install
-- ...
+    ```shell
+    cd web
+    mvn spring-boot:run
+    ```
 
-### Quickstart
-(Add steps to get up and running quickly)
-
-1. git clone [repository clone url]
-2. cd [repository name]
-3. ...
-
-
-## Demo
-
-A demo app is included to show how to use the project.
-
-To run the demo, follow these steps:
-
-(Add steps to start up the demo)
-
-1.
-2.
-3.
-
-## Resources
-
-(Any additional resources or related projects)
-
-- Link to supporting information
-- Link to similar sample
-- ...
+5. Access `http://localhost:8080` by browser.
