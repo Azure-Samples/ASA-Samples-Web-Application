@@ -51,11 +51,6 @@
       <artifactId>applicationinsights-runtime-attach</artifactId>
       <version>3.3.1</version>
     </dependency>
-    <!-- Spring Cloud Azure dependencies -->
-    <dependency>
-      <groupId>com.azure.spring</groupId>
-      <artifactId>spring-cloud-azure-starter-jdbc-postgresql</artifactId>
-    </dependency>
   </dependencies>
 
   <build>
