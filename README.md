@@ -3,42 +3,21 @@
 ## Prerequisites
 
 - Java 17 or later
-- Maven
-- Docker
 
 ## Run The App
 
-1. Prepare necessary environment variable.
+1. Build sample project.
 
     ```shell
-    export POSTGRES_PASSWORD=mysecretpassword
+    ./mvnw clean package -DskipTests
     ```
 
-2. Start a PostgreSQL docker container.
+2. Run sample project.
 
     ```shell
-    docker run \
-        --name todo-postgres \
-        -e POSTGRES_DB=postgres \
-        -e POSTGRES_USER=postgres \
-        -e POSTGRES_PASSWORD=${POSTGRES_PASSWORD} \
-        -d \
-        -p 5432:5432 \
-        postgres:11.19-alpine
+    ./mvnw spring-boot:run -f web/pom.xml
     ```
 
-3. Build sample project.
-
-    ```shell
-    mvn clean package -DskipTests
-    ```
-
-4. Run sample project.
-
-    ```shell
-    mvn spring-boot:run -f web/pom.xml
-    ```
-
-5. Access `http://localhost:8080` by browser, you will see a page like this:
+3. Access `http://localhost:8080` by browser, you will see a page like this:
 
 > ![web.png](./assets/web.png)
