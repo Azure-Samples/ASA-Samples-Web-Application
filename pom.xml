@@ -33,11 +33,6 @@
     <dependencies>
       <!-- Azure dependencies -->
       <dependency>
-        <groupId>com.microsoft.azure</groupId>
-        <artifactId>applicationinsights-runtime-attach</artifactId>
-        <version>3.3.1</version>
-      </dependency>
-      <dependency>
         <groupId>com.azure.spring</groupId>
         <artifactId>spring-cloud-azure-dependencies</artifactId>
         <version>${spring-cloud-azure.version}</version>
