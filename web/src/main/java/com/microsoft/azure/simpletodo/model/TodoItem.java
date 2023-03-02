@@ -21,7 +21,6 @@ import javax.annotation.Generated;
  * A task that needs to be completed
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen")
 @Entity
 public class TodoItem {
 
