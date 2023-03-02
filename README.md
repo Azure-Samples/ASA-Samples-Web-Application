@@ -8,7 +8,7 @@ There are 2 branches about this repository:
 
 - Java 17 or later
 
-## Run The App
+## Run the app in localhost
 
 1. Build sample project.
 
@@ -25,3 +25,7 @@ There are 2 branches about this repository:
 3. Access `http://localhost:8080` by browser, you will see a page like this:
 
 > ![web.png](./assets/web.png)
+
+## Run the app in Azure Spring Apps.
+
+Please refer to [Quickstart: Launch your first web app](.) (todo: Update the link when the article is ready.) to get more information about running the app in Azure Spring Apps.
