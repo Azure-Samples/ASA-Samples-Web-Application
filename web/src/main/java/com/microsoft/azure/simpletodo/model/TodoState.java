@@ -9,7 +9,6 @@ import javax.annotation.Generated;
  * Gets or Sets TodoState
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen")
 public enum TodoState {
 
   TODO("todo"),

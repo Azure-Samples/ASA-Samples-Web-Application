@@ -17,7 +17,6 @@ import javax.annotation.Generated;
  *  A list of related Todo items
  */
 
-@Generated(value = "org.openapitools.codegen.languages.SpringCodegen")
 @Entity
 public class TodoList {
 
