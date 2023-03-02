@@ -1,4 +1,4 @@
-# Azure Spring Apps Sample - Simple Todo App
+# Azure Spring Apps Sample - Web Application
 
 ## Branch description
 
