@@ -1,8 +1,12 @@
 # Azure Spring Apps Sample - Simple Todo App
 
-There are 2 branches about this repository:
-1. [quickstart](https://github.com/Azure-Samples/ASA-Samples-Web-Application/blob/quickstart/README.md). This branch is used to teach you to run [spring web application](https://spring.io/web-applications) in [Azure Spring Apps](https://learn.microsoft.com/en-us/azure/spring-apps/overview) (ASA) in a short time.
-2. [reference-architecture](https://github.com/Azure-Samples/ASA-Samples-Web-Application/blob/reference-architecture/README.md). This branch give the reference architecture (best practice) of running spring web application in Azure Spring Apps.
+## Branch description
+
+| Branch                                                                                                                       | Description                                                                                                                                                                               |
+|------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [quickstart](https://github.com/Azure-Samples/ASA-Samples-Web-Application/blob/quickstart/README.md)                         | Teach you to run [spring web application](https://spring.io/web-applications) in [Azure Spring Apps](https://learn.microsoft.com/en-us/azure/spring-apps/overview) (ASA) in a short time. |
+| [reference-architecture](https://github.com/Azure-Samples/ASA-Samples-Web-Application/blob/reference-architecture/README.md) | Give the reference architecture (best practice) of running spring web application in Azure Spring Apps.                                                                                   |
+
 
 ## Prerequisites
 
@@ -19,7 +23,7 @@ There are 2 branches about this repository:
 2. Run sample project.
 
     ```shell
-    ./mvnw spring-boot:run -f web/pom.xml
+    java -jar web/target/simple-todo-web-0.0.1-SNAPSHOT.jar
     ```
 
 3. Access `http://localhost:8080` by browser, you will see a page like this:
