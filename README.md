@@ -23,7 +23,7 @@
 2. Run sample project.
 
     ```shell
-    ./mvnw spring-boot:run -f web/pom.xml
+    java -jar web/target/simple-todo-web-0.0.1-SNAPSHOT.jar
     ```
 
 3. Access `http://localhost:8080` by browser, you will see a page like this:
