@@ -19,7 +19,7 @@ There are 2 branches about this repository:
 2. Run sample project.
 
     ```shell
-    ./mvnw spring-boot:run -f web/pom.xml
+    ./mvnw spring-boot:run -f src/web/pom.xml
     ```
 
 3. Access `http://localhost:8080` by browser, you will see a page like this:
