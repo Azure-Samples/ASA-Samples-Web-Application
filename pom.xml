@@ -24,8 +24,8 @@
   </properties>
 
   <modules>
-    <module>client</module>
-    <module>web</module>
+    <module>src/client</module>
+    <module>src/web</module>
   </modules>
 
   <dependencyManagement>
@@ -49,6 +49,7 @@
           <version>1.10.0</version>
         </plugin>
         <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-resources-plugin</artifactId>
           <version>3.1.0</version>
         </plugin>

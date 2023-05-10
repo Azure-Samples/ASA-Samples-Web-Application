@@ -1,0 +1,21 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE-PASSWORD}
+  jackson:
+    date-format: com.microsoft.azure.simpletodo.configuration.RFC3339DateFormat
+    serialization: 
+      write-dates-as-timestamps: false
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+  cloud:
+    azure:
+      keyvault:
+        secret:
+          property-sources[0]:
+            enabled: true
+            endpoint: ${AZURE_KEY_VAULT_ENDPOINT}
