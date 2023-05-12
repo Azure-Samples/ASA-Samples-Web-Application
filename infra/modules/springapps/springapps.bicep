@@ -30,7 +30,7 @@ resource asaApp 'Microsoft.AppPlatform/Spring/apps@2022-12-01' = {
 }
 
 resource asaDeployment 'Microsoft.AppPlatform/Spring/apps/deployments@2022-12-01' = {
-  name: 'asa-deployment'
+  name: 'default'
   parent: asaApp
   properties: {
     deploymentSettings: {
