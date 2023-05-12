@@ -29,16 +29,13 @@ var resourceToken = toLower(uniqueString(subscription().id, environmentName, loc
 var asaInstanceName = '${environmentName}-${abbrs.springApps}${resourceToken}'
 var appName = 'simple-todo-web'
 var keyVaultName = '${abbrs.keyVaultVaults}${resourceToken}'
-var serverName = '${abbrs.postgresServer}${resourceToken}'
+var psqlServerName = '${environmentName}-${abbrs.postgresServer}${resourceToken}'
 var databaseName = 'Todo'
-var psqlAdminPasswordSecretName = 'DATABASE-ADMIN-PASSWORD'
 var psqlUserPasswordSecretName = 'DATABASE-PASSWORD'
-var psqlUserNameSecretName = 'DATABASE-USERNAME'
 var psqlAdminName = 'psqladmin'
 var psqlUserName = 'psqluser'
 var tags = {
   'azd-env-name': environmentName
-  'azd-service-name': appName
   'spring-cloud-azure': 'true'
 }
 
@@ -65,7 +62,7 @@ module postgresql 'modules/postgresql/flexibleserver.bicep' = {
   name: '${deployment().name}--pg'
   scope: resourceGroup(rg.name)
   params: {
-  	serverName: serverName
+  	serverName: psqlServerName
     location: location
   	tags: tags
   	keyVaultName: keyVault.outputs.name
@@ -73,7 +70,6 @@ module postgresql 'modules/postgresql/flexibleserver.bicep' = {
   	psqlUserName: psqlUserName
     psqlAdminPassword: psqlAdminPassword
     psqlUserPassword: psqlUserPassword
-    psqlAdminPasswordSecretName: psqlAdminPasswordSecretName
     psqlUserPasswordSecretName: psqlUserPasswordSecretName
   }
 }

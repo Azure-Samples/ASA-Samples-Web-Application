@@ -8,7 +8,6 @@ param psqlUserName string
 param psqlAdminPassword string
 @secure()
 param psqlUserPassword string
-param psqlAdminPasswordSecretName string
 param psqlUserPasswordSecretName string
 param databaseName string = 'todo'
 param version string = '12'
@@ -95,13 +94,7 @@ resource psqlDeploymentScript 'Microsoft.Resources/deploymentScripts@2020-10-01'
     ]
 
     scriptContent: '''
-su -
-apt-get install sudo -y
-usermod -aG sudo $USER
-sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.li st.d/pgdg.list'
-wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
-sudo apt-get update
-sudo apt-get -y install postgresql
+apk add postgresql-client
 
 cat << EOF > create_user.sql
 CREATE ROLE "$PSQLUSERNAME" WITH LOGIN PASSWORD '$PSQLUSERPASSWORD';
@@ -111,14 +104,9 @@ EOF
 psql "host=$DBSERVER.postgres.database.azure.com user=$PSQLADMINNAME dbname=$DBNAME port=5432 password=$PSQLADMINPASSWORD sslmode=require" < create_user.sql
     '''
   }
-}
-
-resource psqlAdminPasswordSecret 'Microsoft.KeyVault/vaults/secrets@2022-07-01' = {
-  parent: keyVault
-  name: psqlAdminPasswordSecretName
-  properties: {
-    value: psqlAdminPassword
-  }
+  dependsOn: [
+  	postgresServer
+  ]
 }
 
 resource psqlUserPasswordSecret 'Microsoft.KeyVault/vaults/secrets@2022-07-01' = {
