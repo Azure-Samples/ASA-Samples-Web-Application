@@ -10,7 +10,7 @@ param psqlAdminPassword string
 param psqlUserPassword string
 param psqlUserPasswordSecretName string
 param databaseName string = 'todo'
-param version string = '12'
+param version string = '14'
 
 // Latest official version 2022-12-01 does not have Bicep types available
 resource postgresServer 'Microsoft.DBforPostgreSQL/flexibleServers@2022-12-01' = {
@@ -33,7 +33,7 @@ resource postgresServer 'Microsoft.DBforPostgreSQL/flexibleServers@2022-12-01' =
       mode: 'Disabled'
     }
     authConfig: {
-      activeDirectoryAuth: 'Enabled'
+      activeDirectoryAuth: 'Disabled'
       passwordAuth: 'Enabled'
       tenantId: subscription().tenantId
     }

@@ -1,31 +1,120 @@
-# Azure Spring Apps Sample - Simple Todo App
+---
+page_type: sample
+languages:
+- azdeveloper
+- java
+- bicep
+  products:
+- azure
+- azure-spring-apps
+- azure-postgresql
+- azure-key-vault
+- azure-pipelines
+- ms-build-openjdk
+  urlFragment: todo-java-postgresql-asa
+  name: React Web App with Java API and PostgreSQL - Flexible Server on Azure App Service
+  description: A complete ToDo app on Azure Spring Apps with Java API and Azure Database for PostgreSQL flexible server for storage. Uses Azure Developer CLI (azd) to build, deploy, and run
+---
+<!-- YAML front-matter schema: https://review.learn.microsoft.com/en-us/help/contribute/samples/process/onboarding?branch=main#supported-metadata-fields-for-readmemd -->
+# React Web App with Java API and PostgreSQL - Flexible Server on Azure App Service
 
-There are 2 branches about this repository:
-1. [quickstart](https://github.com/Azure-Samples/ASA-Samples-Web-Application/blob/quickstart/README.md). This branch is used to teach you to run [spring web application](https://spring.io/web-applications) in [Azure Spring Apps](https://learn.microsoft.com/en-us/azure/spring-apps/overview) (ASA) in a short time.
-2. [reference-architecture](https://github.com/Azure-Samples/ASA-Samples-Web-Application/blob/reference-architecture/README.md). This branch give the reference architecture (best practice) of running spring web application in Azure Spring Apps.
+A blueprint for getting a React web app with a Java API and a PostgreSQL - Flexible Server on Azure. The blueprint includes sample application code (a ToDo web app) which can be removed and replaced with your own application code. Add your own source code and leverage the Infrastructure as Code assets (written in Bicep) to get up and running quickly. This architecture is for running containerized apps or microservices on a serverless platform.
+
+Let's jump in and get this up and running in Azure. When you are finished, you will have a fully functional web app deployed to the cloud. In later steps, you'll see how to setup a pipeline and run the application.
+
+!["Screenshot of deployed ToDo app"](assets/web.png)
+
+<sup>Screenshot of the deployed ToDo app</sup>
 
 ## Prerequisites
 
-- Java 17 or later
+The following prerequisites are required to use this application. Please ensure that you have them all installed locally.
 
-## Run the app in localhost
+- [Azure Developer CLI](https://aka.ms/azd-install)
+- [Java 17 or later](https://learn.microsoft.com/en-us/java/openjdk/install) - for API backend
+- [Node.js with npm (16.13.1+)](https://nodejs.org/) - for the Web frontend
+- [Docker](https://docs.docker.com/get-docker/)
 
-1. Build sample project.
+### Quickstart
 
-    ```shell
-    ./mvnw clean package -DskipTests
-    ```
+To learn how to get started with any template, follow the steps in [this quickstart](https://learn.microsoft.com/azure/developer/azure-developer-cli/get-started?tabs=localinstall&pivots=programming-language-java) with this template(`Azure-Samples/ASA-Samples-Web-Application`).
 
-2. Run sample project.
+This quickstart will show you how to authenticate on Azure, initialize using a template, provision infrastructure and deploy code on Azure via the following commands:
 
-    ```shell
-    ./mvnw spring-boot:run -f src/web/pom.xml
-    ```
+```bash
+# Log in to azd. Only required once per-install.
+azd auth login
 
-3. Access `http://localhost:8080` by browser, you will see a page like this:
+# Enable Azure Spring Apps feature for AZD
+azd config set alpha.springapp on
 
-> ![web.png](./assets/web.png)
+# First-time project setup. Initialize a project in the current directory, using this template. 
+azd init --template Azure-Samples/todo-csharp-cosmos-sql
 
-## Run the app in Azure Spring Apps.
+# Provision and deploy to Azure
+azd up
+```
 
-Please refer to [Quickstart: Launch your first web app](.) (todo: Update the link when the article is ready.) to get more information about running the app in Azure Spring Apps.
+> NOTE: This template may only be used with the following Azure locations:
+>
+> - Australia East
+> - Brazil South
+> - Canada Central
+> - Central US
+> - East Asia
+> - East US
+> - East US 2
+> - Germany West Central
+> - Japan East
+> - Korea Central
+> - North Central US
+> - North Europe
+> - South Central US
+> - UK South
+> - West Europe
+> - West US
+>
+> If you attempt to use the template with an unsupported region, the provision step will fail.
+
+### Application Architecture
+
+This application utilizes the following Azure resources:
+
+- [**Azure Spring Apps**](https://docs.microsoft.com/azure/spring-apps/) to host the application
+- [**Azure PostgreSQL - Flexible Server**](https://docs.microsoft.com/azure/postgresql/flexible-server/) for storage
+- [**Azure Key Vault**](https://docs.microsoft.com/azure/key-vault/) for securing secrets
+
+Here's a high level architecture diagram that illustrates these components. Notice that these are all contained within a single [resource group](https://docs.microsoft.com/azure/azure-resource-manager/management/manage-resource-groups-portal), that will be created for you when you create the resources.
+
+!["Application architecture diagram"](assets/resources.png)
+
+> This template provisions resources to an Azure subscription that you will select upon provisioning them. Please refer to the [Pricing calculator for Microsoft Azure](https://azure.microsoft.com/pricing/calculator/) and, if needed, update the included Azure resource definitions found in `infra/main.bicep` to suit your needs.
+
+### Application Code
+
+This template is structured to follow the [Azure Developer CLI](https://aka.ms/azure-dev/overview). You can learn more about `azd` architecture in [the official documentation](https://learn.microsoft.com/azure/developer/azure-developer-cli/make-azd-compatible?pivots=azd-create#understand-the-azd-architecture).
+
+### Next Steps
+
+At this point, you have a complete application deployed on Azure. But there is much more that the Azure Developer CLI can do. These next steps will introduce you to additional commands that will make creating applications on Azure much easier. Using the Azure Developer CLI, you can delete the resources easily.
+
+- [`azd down`](https://learn.microsoft.com/azure/developer/azure-developer-cli/reference#azd-down) - to delete all the Azure resources created with this template
+
+
+### Additional `azd` commands
+
+The Azure Developer CLI includes many other commands to help with your Azure development experience. You can view these commands at the terminal by running `azd help`. You can also view the full list of commands on our [Azure Developer CLI command](https://aka.ms/azure-dev/ref) page.
+
+## Security
+
+### Roles
+
+This template creates a [managed identity](https://docs.microsoft.com/azure/active-directory/managed-identities-azure-resources/overview) for your app inside your Azure Active Directory tenant, and it is used to authenticate your app with Azure and other services that support Azure AD authentication like Key Vault via access policies. You will see principalId referenced in the infrastructure as code files, that refers to the id of the currently logged in Azure Developer CLI user, which will be granted access policies and permissions to run the application locally. To view your managed identity in the Azure Portal, follow these [steps](https://docs.microsoft.com/azure/active-directory/managed-identities-azure-resources/how-to-view-managed-identity-service-principal-portal).
+
+### Key Vault
+
+This template uses [Azure Key Vault](https://docs.microsoft.com/azure/key-vault/general/overview) to securely store your PostgreSQL - Flexible Server user password. Key Vault is a cloud service for securely storing and accessing secrets (API keys, passwords, certificates, cryptographic keys) and makes it simple to give other Azure services access to them. As you continue developing your solution, you may add as many secrets to your Key Vault as you require.
+
+## Reporting Issues and Feedback
+
+If you have any feature requests, issues, or areas for improvement, please [file an issue](https://aka.ms/azure-dev/issues). To keep up-to-date, ask questions, or share suggestions, join our [GitHub Discussions](https://aka.ms/azure-dev/discussions). You may also contact us via AzDevTeam@microsoft.com.
