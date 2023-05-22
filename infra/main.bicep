@@ -26,10 +26,10 @@ param psqlUserPassword string
 
 var abbrs = loadJsonContent('./abbreviations.json')
 var resourceToken = toLower(uniqueString(subscription().id, environmentName, location))
-var asaInstanceName = '${environmentName}-${abbrs.springApps}${resourceToken}'
+var asaInstanceName = '${abbrs.springApps}${resourceToken}'
 var appName = 'simple-todo-web'
 var keyVaultName = '${abbrs.keyVaultVaults}${resourceToken}'
-var psqlServerName = '${environmentName}-${abbrs.postgresServer}${resourceToken}'
+var psqlServerName = '${abbrs.postgresServer}${resourceToken}'
 var databaseName = 'Todo'
 var psqlUserPasswordSecretName = 'DATABASE-PASSWORD'
 var psqlAdminName = 'psqladmin'
