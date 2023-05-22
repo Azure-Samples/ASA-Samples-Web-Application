@@ -1,8 +1,8 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/alpha/azure.yaml.json
 
-name: web-application-asa
+name: asa-samples-web-application
 metadata:
-  template: web-application-asa@0.0.1-beta
+  template: asa-samples-web-application@0.0.1-beta
 services:
   simple-todo-web:
     project: ./src/web
