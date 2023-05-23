@@ -14,7 +14,7 @@ services:
       prepackage:
         windows:
           shell: pwsh
-          run: cd ../client;../../mvnw.cmd clean install
+          run: cd ../..;./mvnw.cmd clean install -N;cd src/client;../../mvnw.cmd clean install
         posix:
           shell: sh
-          run: cd ../client;../../mvnw clean install
+          run: cd ../..;./mvnw clean install -N;cd src/client;../../mvnw clean install
