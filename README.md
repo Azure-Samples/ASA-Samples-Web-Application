@@ -26,7 +26,7 @@ Let's jump in and get this up and running in Azure. When you are finished, you w
 
 <sup>Screenshot of the deployed ToDo app</sup>
 
-## Prerequisites
+### Prerequisites
 
 The following prerequisites are required to use this application. Please ensure that you have them all installed locally.
 
