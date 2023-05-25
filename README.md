@@ -55,27 +55,6 @@ azd init --template Azure-Samples/ASA-Samples-Web-Application
 azd up
 ```
 
-> NOTE: This template may only be used with the following Azure locations:
->
-> - Australia East
-> - Brazil South
-> - Canada Central
-> - Central US
-> - East Asia
-> - East US
-> - East US 2
-> - Germany West Central
-> - Japan East
-> - Korea Central
-> - North Central US
-> - North Europe
-> - South Central US
-> - UK South
-> - West Europe
-> - West US
->
-> If you attempt to use the template with an unsupported region, the provision step will fail.
-
 ### Application Architecture
 
 This application utilizes the following Azure resources:
