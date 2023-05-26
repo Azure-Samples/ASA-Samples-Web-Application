@@ -24,8 +24,8 @@
   </properties>
 
   <modules>
-    <module>src/client</module>
-    <module>src/web</module>
+    <module>client</module>
+    <module>web</module>
   </modules>
 
   <dependencyManagement>

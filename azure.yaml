@@ -5,7 +5,7 @@ metadata:
   template: asa-samples-web-application@0.0.1-beta
 services:
   simple-todo-web:
-    project: ./src/web
+    project: ./web
     host: springapp
     language: java
     spring:
@@ -14,7 +14,7 @@ services:
       prepackage:
         windows:
           shell: pwsh
-          run: cd ../..;./mvnw.cmd clean install -N;cd src/client;../../mvnw.cmd clean install
+          run: cd ..;./mvnw.cmd clean install -N;cd client;../mvnw.cmd clean install
         posix:
           shell: sh
-          run: cd ../..;./mvnw clean install -N;cd src/client;../../mvnw clean install
+          run: cd ..;./mvnw clean install -N;cd client;../mvnw clean install

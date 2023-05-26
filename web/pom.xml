@@ -6,7 +6,7 @@
     <groupId>com.microsoft.azure.simpletodo</groupId>
     <artifactId>simple-todo-parent</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <relativePath>../../pom.xml</relativePath>
+    <relativePath>../pom.xml</relativePath>
   </parent>
 
   <artifactId>simple-todo-web</artifactId>
@@ -46,10 +46,6 @@
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-databind</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.azure.spring</groupId>
-      <artifactId>spring-cloud-azure-starter-keyvault-secrets</artifactId>
     </dependency>
   </dependencies>
 

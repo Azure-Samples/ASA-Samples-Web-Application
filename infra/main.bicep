@@ -28,10 +28,8 @@ var abbrs = loadJsonContent('./abbreviations.json')
 var resourceToken = toLower(uniqueString(subscription().id, environmentName, location))
 var asaInstanceName = '${abbrs.springApps}${resourceToken}'
 var appName = 'simple-todo-web'
-var keyVaultName = '${abbrs.keyVaultVaults}${resourceToken}'
 var psqlServerName = '${abbrs.postgresServer}${resourceToken}'
 var databaseName = 'Todo'
-var psqlUserPasswordSecretName = 'DATABASE-PASSWORD'
 var psqlAdminName = 'psqladmin'
 var psqlUserName = 'psqluser'
 var tags = {
@@ -47,17 +45,6 @@ resource rg 'Microsoft.Resources/resourceGroups@2021-04-01' = {
   tags: tags
 }
 
-module keyVault 'modules/keyvault/keyvault.bicep' = {
-  name: '${deployment().name}--kv'
-  scope: resourceGroup(rg.name)
-  params: {
-  	keyVaultName: keyVaultName
-  	location: location
-	tags: tags
-	principalId: principalId
-  }
-}
-
 module postgresql 'modules/postgresql/flexibleserver.bicep' = {
   name: '${deployment().name}--pg'
   scope: resourceGroup(rg.name)
@@ -65,12 +52,11 @@ module postgresql 'modules/postgresql/flexibleserver.bicep' = {
   	serverName: psqlServerName
     location: location
   	tags: tags
-  	keyVaultName: keyVault.outputs.name
   	psqlAdminName: psqlAdminName
   	psqlUserName: psqlUserName
     psqlAdminPassword: psqlAdminPassword
     psqlUserPassword: psqlUserPassword
-    psqlUserPasswordSecretName: psqlUserPasswordSecretName
+    databaseName: databaseName
   }
 }
 
@@ -83,19 +69,7 @@ module springApps 'modules/springapps/springapps.bicep' = {
 	tags: union(tags, { 'azd-service-name': appName })
 	asaInstanceName: asaInstanceName
 	relativePath: relativePath
-	keyVaultName: keyVault.outputs.name
 	databaseUsername: psqlUserName
+	databasePassword: psqlUserPassword
   }
 }
-
-module apiKeyVaultAccess './modules/keyvault/keyvault-access.bicep' = {
-  name: 'api-keyvault-access'
-  scope: resourceGroup(rg.name)
-  params: {
-    keyVaultName: keyVault.outputs.name
-    principalId: springApps.outputs.identityPrincipalId
-  }
-}
-
-output AZURE_KEY_VAULT_ENDPOINT string = keyVault.outputs.endpoint
-output AZURE_KEY_VAULT_NAME string = keyVault.outputs.name
