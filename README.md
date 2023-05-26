@@ -4,16 +4,16 @@ languages:
 - azdeveloper
 - java
 - bicep
-  products:
+products:
 - azure
 - azure-spring-apps
 - azure-postgresql
 - azure-key-vault
 - azure-pipelines
 - ms-build-openjdk
-  urlFragment: todo-java-postgresql-asa
-  name: React Web App with Java API and PostgreSQL - Flexible Server on Azure App Service
-  description: A complete ToDo app on Azure Spring Apps with Java API and Azure Database for PostgreSQL flexible server for storage. Uses Azure Developer CLI (azd) to build, deploy, and run
+urlFragment: todo-java-postgresql-asa
+name: React Web App with Java API and PostgreSQL - Flexible Server on Azure App Service
+description: A complete ToDo app on Azure Spring Apps with Java API and Azure Database for PostgreSQL flexible server for storage. Uses Azure Developer CLI (azd) to build, deploy, and run
 ---
 <!-- YAML front-matter schema: https://review.learn.microsoft.com/en-us/help/contribute/samples/process/onboarding?branch=main#supported-metadata-fields-for-readmemd -->
 # React Web App with Java API and PostgreSQL - Flexible Server on Azure App Service
@@ -61,7 +61,6 @@ This application utilizes the following Azure resources:
 
 - [**Azure Spring Apps**](https://docs.microsoft.com/azure/spring-apps/) to host the application
 - [**Azure PostgreSQL - Flexible Server**](https://docs.microsoft.com/azure/postgresql/flexible-server/) for storage
-- [**Azure Key Vault**](https://docs.microsoft.com/azure/key-vault/) for securing secrets
 
 Here's a high level architecture diagram that illustrates these components. Notice that these are all contained within a single [resource group](https://docs.microsoft.com/azure/azure-resource-manager/management/manage-resource-groups-portal), that will be created for you when you create the resources.
 
@@ -89,10 +88,6 @@ The Azure Developer CLI includes many other commands to help with your Azure dev
 ### Roles
 
 This template creates a [managed identity](https://docs.microsoft.com/azure/active-directory/managed-identities-azure-resources/overview) for your app inside your Azure Active Directory tenant, and it is used to authenticate your app with Azure and other services that support Azure AD authentication like Key Vault via access policies. You will see principalId referenced in the infrastructure as code files, that refers to the id of the currently logged in Azure Developer CLI user, which will be granted access policies and permissions to run the application locally. To view your managed identity in the Azure Portal, follow these [steps](https://docs.microsoft.com/azure/active-directory/managed-identities-azure-resources/how-to-view-managed-identity-service-principal-portal).
-
-### Key Vault
-
-This template uses [Azure Key Vault](https://docs.microsoft.com/azure/key-vault/general/overview) to securely store your PostgreSQL - Flexible Server user password. Key Vault is a cloud service for securely storing and accessing secrets (API keys, passwords, certificates, cryptographic keys) and makes it simple to give other Azure services access to them. As you continue developing your solution, you may add as many secrets to your Key Vault as you require.
 
 ## Reporting Issues and Feedback
 

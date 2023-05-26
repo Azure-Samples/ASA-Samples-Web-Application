@@ -1,14 +1,12 @@
 param serverName string
 param location string = resourceGroup().location
 param tags object = {}
-param keyVaultName string
 param psqlAdminName string
 param psqlUserName string
 @secure()
 param psqlAdminPassword string
 @secure()
 param psqlUserPassword string
-param psqlUserPasswordSecretName string
 param databaseName string = 'todo'
 param version string = '14'
 
@@ -109,16 +107,5 @@ psql "host=$DBSERVER.postgres.database.azure.com user=$PSQLADMINNAME dbname=$DBN
   ]
 }
 
-resource psqlUserPasswordSecret 'Microsoft.KeyVault/vaults/secrets@2022-07-01' = {
-  parent: keyVault
-  name: psqlUserPasswordSecretName
-  properties: {
-    value: psqlUserPassword
-  }
-}
-
-resource keyVault 'Microsoft.KeyVault/vaults@2022-07-01' existing = {
-  name: keyVaultName
-}
 
 output POSTGRES_DOMAIN_NAME string = postgresServer.properties.fullyQualifiedDomainName
