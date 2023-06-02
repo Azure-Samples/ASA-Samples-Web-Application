@@ -39,8 +39,8 @@ resource asaDeployment 'Microsoft.AppPlatform/Spring/apps/deployments@2022-12-01
       }
       environmentVariables: {
         SPRING_DATASOURCE_URL: datasourceUrl
-		DATABASE_USERNAME: databaseUsername
-		DATABASE_PASSWORD: databasePassword
+		SPRING_DATASOURCE_USERNAME: databaseUsername
+		SPRING_DATASOURCE_PASSWORD: databasePassword
 	  }
     }
     source: {
