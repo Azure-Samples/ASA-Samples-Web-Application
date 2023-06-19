@@ -1,4 +1,5 @@
 param asaInstanceName string
+param asaManagedEnvironmentName string
 param appName string
 param location string = resourceGroup().location
 param tags object = {}
@@ -8,17 +9,35 @@ param databaseUsername string
 param databasePassword string
 param datasourceUrl string
 
-resource asaInstance 'Microsoft.AppPlatform/Spring@2022-12-01' = {
-  name: asaInstanceName
+resource asaManagedEnvironment 'Microsoft.App/managedEnvironments@2022-11-01-preview' = {
+  name: asaManagedEnvironmentName
   location: location
   tags: tags
-  sku: {
-      name: 'B0'
-      tier: 'Basic'
-    }
+  properties: {
+    workloadProfiles: [
+	  {
+		name: 'Consumption'
+		workloadProfileType: 'Consumption'
+	  }
+	]
+  }
+
 }
 
-resource asaApp 'Microsoft.AppPlatform/Spring/apps@2022-12-01' = {
+resource asaInstance 'Microsoft.AppPlatform/Spring@2023-03-01-preview' = {
+  name: asaInstanceName
+  location: location
+  tags: union(tags, { 'azd-service-name': appName })
+  sku: {
+    name: 'S0'
+	tier: 'StandardGen2'
+  }
+  properties: {
+	managedEnvironmentId: asaManagedEnvironment.id
+  }
+}
+
+resource asaApp 'Microsoft.AppPlatform/Spring/apps@2023-03-01-preview' = {
   name: appName
   location: location
   parent: asaInstance
@@ -28,7 +47,7 @@ resource asaApp 'Microsoft.AppPlatform/Spring/apps@2022-12-01' = {
   }
 }
 
-resource asaDeployment 'Microsoft.AppPlatform/Spring/apps/deployments@2022-12-01' = {
+resource asaDeployment 'Microsoft.AppPlatform/Spring/apps/deployments@2023-03-01-preview' = {
   name: 'default'
   parent: asaApp
   properties: {

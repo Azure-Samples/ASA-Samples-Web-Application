@@ -23,6 +23,7 @@ param psqlUserPassword string
 var abbrs = loadJsonContent('./abbreviations.json')
 var resourceToken = toLower(uniqueString(subscription().id, environmentName, location))
 var asaInstanceName = '${abbrs.springApps}${resourceToken}'
+var asaManagedEnvironmentName = '${abbrs.appContainerAppsManagedEnvironment}${resourceToken}'
 var appName = 'simple-todo-web'
 var psqlServerName = '${abbrs.postgresServer}${resourceToken}'
 var databaseName = 'Todo'
@@ -63,8 +64,9 @@ module springApps 'modules/springapps/springapps.bicep' = {
   params: {
     location: location
 	appName: appName
-	tags: union(tags, { 'azd-service-name': appName })
+	tags: tags
 	asaInstanceName: asaInstanceName
+	asaManagedEnvironmentName: asaManagedEnvironmentName
 	relativePath: relativePath
 	databaseUsername: psqlUserName
 	databasePassword: psqlUserPassword
