@@ -34,6 +34,7 @@ The following prerequisites are required to use this application. Please ensure 
 - [Java 17 or later](https://learn.microsoft.com/en-us/java/openjdk/install) - for API backend
 - [Node.js with npm (16.13.1+)](https://nodejs.org/) - for the Web frontend
 - [Docker](https://docs.docker.com/get-docker/)
+- [Powershell 7](https://learn.microsoft.com/powershell/scripting/install/installing-powershell-on-windows?view=powershell-7.3) if you use windows
 
 ### Quickstart
 
@@ -45,7 +46,7 @@ This quickstart will show you how to authenticate on Azure, initialize using a t
 # Log in to azd. Only required once per-install.
 azd auth login
 
-# Enable Azure Spring Apps feature for AZD
+# Enable Azure Spring Apps feature for AZD. Only required once per-install.
 azd config set alpha.springapp on
 
 # First-time project setup. Initialize a project in the current directory, using this template. 
