@@ -6,8 +6,7 @@ spring:
     serialization: 
       write-dates-as-timestamps: false
   jpa:
-    generate-ddl: true
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     show-sql: true
 
