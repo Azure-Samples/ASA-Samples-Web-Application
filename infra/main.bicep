@@ -13,10 +13,10 @@ param location string
 param relativePath string
 
 @allowed([
-  'Consumption'
-  'Standard'
+  'consumption'
+  'standard'
 ])
-param plan string
+param plan string = 'consumption'
 
 @secure()
 @description('PSQL Server administrator password')
@@ -64,7 +64,7 @@ module postgresql 'modules/postgresql/flexibleserver.bicep' = {
   }
 }
 
-module springAppsConsumption 'modules/springapps/springappsConsumption.bicep' = if (plan == 'Consumption') {
+module springAppsConsumption 'modules/springapps/springappsConsumption.bicep' = if (plan == 'consumption') {
   name: '${deployment().name}--asaconsumption'
   scope: resourceGroup(rg.name)
   params: {
@@ -80,7 +80,7 @@ module springAppsConsumption 'modules/springapps/springappsConsumption.bicep' = 
   }
 }
 
-module springAppsStandard 'modules/springapps/springappsStandard.bicep' = if (plan == 'Standard') {
+module springAppsStandard 'modules/springapps/springappsStandard.bicep' = if (plan == 'standard') {
   name: '${deployment().name}--asastandard'
   scope: resourceGroup(rg.name)
   params: {

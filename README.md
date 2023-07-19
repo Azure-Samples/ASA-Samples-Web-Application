@@ -56,6 +56,12 @@ azd init --template Azure-Samples/ASA-Samples-Web-Application
 azd up
 ```
 
+The template uses ASA consumption plan by default. If you want to switch to `Standard` plan, you can use the following command, then run `azd up`.
+
+```bash
+azd env set PLAN standard
+```
+
 ### Application Architecture
 
 This application utilizes the following Azure resources:

@@ -10,6 +10,9 @@
     },
     "relativePath": {
       "value": "${SERVICE_SIMPLE_TODO_WEB_RELATIVE_PATH=<default>}"
+    },
+    "plan": {
+      "value": "${PLAN=consumption}"
     }
   }
 }
