@@ -1,18 +1,17 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
     <version>2.7.8</version>
-    <relativePath/>
+    <relativePath />
     <!-- lookup parent from repository -->
   </parent>
 
   <groupId>com.microsoft.azure.simpletodo</groupId>
   <artifactId>simple-todo-parent</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.0.1</version>
   <name>SimpleTodo Parent</name>
   <description>Simple Todo application parent</description>
   <packaging>pom</packaging>
@@ -74,6 +73,7 @@
 
   <scm>
     <developerConnection>scm:git:git@github.com:Azure-Samples/ASA-Samples-Web-Application.git</developerConnection>
+    <tag>v0.0.1</tag>
   </scm>
 
 </project>
