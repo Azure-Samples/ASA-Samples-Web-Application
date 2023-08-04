@@ -11,7 +11,7 @@
 
   <groupId>com.microsoft.azure.simpletodo</groupId>
   <artifactId>simple-todo-parent</artifactId>
-  <version>0.0.1</version>
+  <version>0.0.2-SNAPSHOT</version>
   <name>SimpleTodo Parent</name>
   <description>Simple Todo application parent</description>
   <packaging>pom</packaging>
@@ -73,7 +73,7 @@
 
   <scm>
     <developerConnection>scm:git:git@github.com:Azure-Samples/ASA-Samples-Web-Application.git</developerConnection>
-    <tag>v0.0.1</tag>
+    <tag>HEAD</tag>
   </scm>
 
 </project>
