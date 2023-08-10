@@ -166,7 +166,7 @@
       "webStaticSites": "stapp-"
     },
     "abbrs": "[variables('$fxv#0')]",
-    "resourceToken": "[toLower(uniqueString(subscription().id, resourceGroup().id, parameters('location')))]",
+    "resourceToken": "[toLower(uniqueString(subscription().id, resourceGroup().name, parameters('location')))]",
     "asaInstanceName": "[format('{0}{1}', variables('abbrs').springApps, variables('resourceToken'))]",
     "appName": "simple-todo-web",
     "psqlServerName": "[format('{0}{1}', variables('abbrs').postgresServer, variables('resourceToken'))]",
@@ -185,7 +185,6 @@
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2022-09-01",
       "name": "[format('{0}--pg', deployment().name)]",
-      "resourceGroup": "[format('{0}{1}', variables('abbrs').resourcesResourceGroups, substring(resourceGroup().id, 0, 4)]",
       "properties": {
         "expressionEvaluationOptions": {
           "scope": "inner"
@@ -370,7 +369,6 @@
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2022-09-01",
       "name": "[format('{0}--asa-standard', deployment().name)]",
-      "resourceGroup": "[format('{0}{1}', variables('abbrs').resourcesResourceGroups, parameters('environmentName'))]",
       "properties": {
         "expressionEvaluationOptions": {
           "scope": "inner"
