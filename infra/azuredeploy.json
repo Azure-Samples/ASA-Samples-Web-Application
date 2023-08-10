@@ -191,7 +191,6 @@
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2022-09-01",
       "name": "[format('{0}--pg', deployment().name)]",
-      "resourceGroup": "[format('{0}{1}', variables('abbrs').resourcesResourceGroups, resourceGroup().name)]",
       "properties": {
         "expressionEvaluationOptions": {
           "scope": "inner"
@@ -377,7 +376,6 @@
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2022-09-01",
       "name": "[format('{0}--asa-consumption', deployment().name)]",
-      "resourceGroup": "[format('{0}{1}', variables('abbrs').resourcesResourceGroups, resourceGroup().name)]",
       "properties": {
         "expressionEvaluationOptions": {
           "scope": "inner"
@@ -420,7 +418,6 @@
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2022-09-01",
       "name": "[format('{0}--asa-standard', deployment().name)]",
-      "resourceGroup": "[format('{0}{1}', variables('abbrs').resourcesResourceGroups, resourceGroup().name)]",
       "properties": {
         "expressionEvaluationOptions": {
           "scope": "inner"
