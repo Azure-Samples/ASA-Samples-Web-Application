@@ -1,22 +1,7 @@
 {
-  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/subscriptionDeploymentTemplate.json#",
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
-  "metadata": {
-    "_generator": {
-      "name": "bicep",
-      "version": "0.18.4.5664",
-      "templateHash": "10463146083516505375"
-    }
-  },
   "parameters": {
-    "environmentName": {
-      "type": "string",
-      "metadata": {
-        "description": "Name of the environment which is used to generate a short unique hash used in all resources."
-      },
-      "maxLength": 64,
-      "minLength": 1
-    },
     "plan": {
       "type": "string",
       "metadata": {
@@ -187,7 +172,7 @@
       "webStaticSites": "stapp-"
     },
     "abbrs": "[variables('$fxv#0')]",
-    "resourceToken": "[toLower(uniqueString(subscription().id, parameters('environmentName'), parameters('location')))]",
+    "resourceToken": "[toLower(uniqueString(subscription().id, resourceGroup().name, parameters('location')))]",
     "asaInstanceName": "[format('{0}{1}', variables('abbrs').springApps, variables('resourceToken'))]",
     "appName": "simple-todo-web",
     "psqlServerName": "[format('{0}{1}', variables('abbrs').postgresServer, variables('resourceToken'))]",
@@ -198,23 +183,15 @@
     "userAssignedManagedIdentityName": "[format('{0}{1}', variables('abbrs').managedIdentityUserAssignedIdentities, variables('resourceToken'))]",
     "tags": {
       "spring-cloud-azure": "true",
-      "deploy-to-azure-button": "true",
-      "env-name": "[parameters('environmentName')]"
+      "deploy-to-azure-button": "true"
     }
   },
   "resources": [
     {
-      "type": "Microsoft.Resources/resourceGroups",
-      "apiVersion": "2021-04-01",
-      "name": "[format('{0}{1}', variables('abbrs').resourcesResourceGroups, parameters('environmentName'))]",
-      "location": "[parameters('location')]",
-      "tags": "[variables('tags')]"
-    },
-    {
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2022-09-01",
       "name": "[format('{0}--pg', deployment().name)]",
-      "resourceGroup": "[format('{0}{1}', variables('abbrs').resourcesResourceGroups, parameters('environmentName'))]",
+      "resourceGroup": "[format('{0}{1}', variables('abbrs').resourcesResourceGroups, resourceGroup().name)]",
       "properties": {
         "expressionEvaluationOptions": {
           "scope": "inner"
@@ -393,17 +370,14 @@
             }
           }
         }
-      },
-      "dependsOn": [
-        "[subscriptionResourceId('Microsoft.Resources/resourceGroups', format('{0}{1}', variables('abbrs').resourcesResourceGroups, parameters('environmentName')))]"
-      ]
+      }
     },
     {
       "condition": "[equals(parameters('plan'), 'consumption')]",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2022-09-01",
       "name": "[format('{0}--asa-consumption', deployment().name)]",
-      "resourceGroup": "[format('{0}{1}', variables('abbrs').resourcesResourceGroups, parameters('environmentName'))]",
+      "resourceGroup": "[format('{0}{1}', variables('abbrs').resourcesResourceGroups, resourceGroup().name)]",
       "properties": {
         "expressionEvaluationOptions": {
           "scope": "inner"
@@ -439,17 +413,14 @@
           "relativePath": "azuredeploy/consumption.json",
           "contentVersion":"1.0.0.0"
         }
-      },
-      "dependsOn": [
-        "[subscriptionResourceId('Microsoft.Resources/resourceGroups', format('{0}{1}', variables('abbrs').resourcesResourceGroups, parameters('environmentName')))]"
-      ]
+      }
     },
     {
       "condition": "[equals(parameters('plan'), 'standard')]",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2022-09-01",
       "name": "[format('{0}--asa-standard', deployment().name)]",
-      "resourceGroup": "[format('{0}{1}', variables('abbrs').resourcesResourceGroups, parameters('environmentName'))]",
+      "resourceGroup": "[format('{0}{1}', variables('abbrs').resourcesResourceGroups, resourceGroup().name)]",
       "properties": {
         "expressionEvaluationOptions": {
           "scope": "inner"
@@ -485,10 +456,7 @@
           "relativePath": "azuredeploy/standard.json",
           "contentVersion":"1.0.0.0"
         }
-      },
-      "dependsOn": [
-        "[subscriptionResourceId('Microsoft.Resources/resourceGroups', format('{0}{1}', variables('abbrs').resourcesResourceGroups, parameters('environmentName')))]"
-      ]
+      }
     }
   ]
 }
