@@ -40,7 +40,7 @@
   "resources": [
     {
       "type": "Microsoft.AppPlatform/Spring",
-      "apiVersion": "2023-05-01-preview",
+      "apiVersion": "2023-03-01-preview",
       "name": "[parameters('asaInstanceName')]",
       "location": "[parameters('location')]",
       "tags": "[parameters('tags')]",
