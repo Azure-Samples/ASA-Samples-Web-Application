@@ -47,7 +47,7 @@
   "resources": [
     {
       "type": "Microsoft.AppPlatform/Spring",
-      "apiVersion": "2022-12-01",
+      "apiVersion": "2023-05-01-preview",
       "name": "[parameters('asaInstanceName')]",
       "location": "[parameters('location')]",
       "tags": "[parameters('tags')]",
@@ -58,7 +58,7 @@
     },
     {
       "type": "Microsoft.AppPlatform/Spring/apps",
-      "apiVersion": "2023-01-01-preview",
+      "apiVersion": "2023-05-01-preview",
       "name": "[format('{0}/{1}', parameters('asaInstanceName'), parameters('appName'))]",
       "location": "[parameters('location')]",
       "properties": {
@@ -127,7 +127,7 @@
     },
     {
       "type": "Microsoft.AppPlatform/Spring/apps/deployments",
-      "apiVersion": "2022-12-01",
+      "apiVersion": "2023-05-01-preview",
       "name": "[format('{0}/{1}/{2}', parameters('asaInstanceName'), parameters('appName'), 'default')]",
       "properties": {
         "active": true,
@@ -161,7 +161,7 @@
     },
     "uri": {
       "type": "string",
-      "value": "[format('https://{0}', reference(resourceId('Microsoft.AppPlatform/Spring/apps', parameters('asaInstanceName'), parameters('appName')), '2021-09-01-preview').url)]"
+      "value": "[format('https://{0}', reference(resourceId('Microsoft.AppPlatform/Spring/apps', parameters('asaInstanceName'), parameters('appName')), '2023-05-01-preview').url)]"
     }
   }
 }
