@@ -27,7 +27,7 @@
     {
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2022-09-01",
-      "name": "[format('{0}--asa-consumption', deployment().name)]",
+      "name": "[format('{0}--asa-enterprise', deployment().name)]",
       "properties": {
         "expressionEvaluationOptions": {
           "scope": "inner"
@@ -35,7 +35,7 @@
         "mode": "Incremental",
         "parameters": {
           "plan": {
-            "value": "consumption"
+            "value": "enterprise"
           },
           "location": {
             "value": "[parameters('location')]"
