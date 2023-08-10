@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schema.management.azure.com/schemas/2018-05-01/subscriptionDeploymentTemplate.json#",
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/subscriptionDeploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "metadata": {
     "_generator": {
@@ -23,9 +23,10 @@
         "description": "Name of the pricing tier which determines the resource and cost associated with your instance."
       },
       "allowedValues": [
-        "Standard",
-        "Consumption"
-      ]
+        "consumption",
+        "standard"
+      ],
+      "defaultValue": "consumption"
     },
     "location": {
       "type": "string",
@@ -191,7 +192,7 @@
     "appName": "simple-todo-web",
     "psqlServerName": "[format('{0}{1}', variables('abbrs').postgresServer, variables('resourceToken'))]",
     "databaseName": "Todo",
-    "datasourceJdbcUrl": "[format('jdbc:postgresql://{0}.postgres.database.azure.com:5432/{1}', variables('psqlServerName'), variables('databaseName'))]",
+    "datasourceJdbcUrl": "[concat('jdbc:postgresql://', variables('psqlServerName'), '.postgres.database.azure.com:5432/', variables('databaseName'))]",
     "psqlAdminName": "psqladmin",
     "psqlUserName": "psqluser",
     "userAssignedManagedIdentityName": "[format('{0}{1}', variables('abbrs').managedIdentityUserAssignedIdentities, variables('resourceToken'))]",
@@ -398,10 +399,10 @@
       ]
     },
     {
-      "condition": "[equals(parameters('plan'), 'Standard')]",
+      "condition": "[equals(parameters('plan'), 'consumption')]",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2022-09-01",
-      "name": "[format('{0}--asa', deployment().name)]",
+      "name": "[format('{0}--asa-consumption', deployment().name)]",
       "resourceGroup": "[format('{0}{1}', variables('abbrs').resourcesResourceGroups, parameters('environmentName'))]",
       "properties": {
         "expressionEvaluationOptions": {
@@ -419,7 +420,7 @@
             "value": "[union(variables('tags'), createObject('asa-service-name', variables('appName')))]"
           },
           "asaInstanceName": {
-            "value": "[variables('asaInstanceName')]"
+            "value": "[concat(variables('asaInstanceName'), '-', parameters('plan'))]"
           },
           "databaseUsername": {
             "value": "[variables('psqlUserName')]"
@@ -431,11 +432,57 @@
             "value": "[variables('datasourceJdbcUrl')]"
           },
           "userAssignedManagedIdentityName": {
-            "value": "[variables('userAssignedManagedIdentityName')]"
+            "value": "[concat(variables('userAssignedManagedIdentityName'), '-', parameters('plan'))]"
           }
         },
         "templateLink": {
-          "relativePath": "deploy-to-azure/basic.json",
+          "relativePath": "azuredeploy/consumption.json",
+          "contentVersion":"1.0.0.0"
+        }
+      },
+      "dependsOn": [
+        "[subscriptionResourceId('Microsoft.Resources/resourceGroups', format('{0}{1}', variables('abbrs').resourcesResourceGroups, parameters('environmentName')))]"
+      ]
+    },
+    {
+      "condition": "[equals(parameters('plan'), 'standard')]",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2022-09-01",
+      "name": "[format('{0}--asa-standard', deployment().name)]",
+      "resourceGroup": "[format('{0}{1}', variables('abbrs').resourcesResourceGroups, parameters('environmentName'))]",
+      "properties": {
+        "expressionEvaluationOptions": {
+          "scope": "inner"
+        },
+        "mode": "Incremental",
+        "parameters": {
+          "location": {
+            "value": "[parameters('location')]"
+          },
+          "appName": {
+            "value": "[variables('appName')]"
+          },
+          "tags": {
+            "value": "[union(variables('tags'), createObject('asa-service-name', variables('appName')))]"
+          },
+          "asaInstanceName": {
+            "value": "[concat(variables('asaInstanceName'), '-', parameters('plan'))]"
+          },
+          "databaseUsername": {
+            "value": "[variables('psqlUserName')]"
+          },
+          "databasePassword": {
+            "value": "[parameters('psqlUserPassword')]"
+          },
+          "datasourceUrl": {
+            "value": "[variables('datasourceJdbcUrl')]"
+          },
+          "userAssignedManagedIdentityName": {
+            "value": "[concat(variables('userAssignedManagedIdentityName'), '-', parameters('plan'))]"
+          }
+        },
+        "templateLink": {
+          "relativePath": "azuredeploy/standard.json",
           "contentVersion":"1.0.0.0"
         }
       },

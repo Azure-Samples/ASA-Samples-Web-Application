@@ -29,9 +29,9 @@ Let's jump in and get this up and running in Azure. When you are finished, you w
 
 | Deploy to Azure Spring Apps | |
 |--|--|
-| Consumption plan|[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fsaragluna%2FASA-Samples-Web-Application%2Fquickstart%2Finfra%2Fdeploy-to-azure.json)|
-| Basic/Standard|[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fsaragluna%2FASA-Samples-Web-Application%2Fquickstart%2Finfra%2Fdeploy-to-azure.json)|
-| Enterprise|[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fsaragluna%2FASA-Samples-Web-Application%2Fquickstart%2Finfra%2Fdeploy-to-azure.json)|
+| Consumption plan|[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmoarychan%2FASA-Samples-Web-Application%2Fmoary%2Fsupport-deploy-to-azure-button%2Finfra%2Fazuredeploy-asa-consumption.json)|
+| Basic/Standard|  [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmoarychan%2FASA-Samples-Web-Application%2Fmoary%2Fsupport-deploy-to-azure-button%2Finfra%2Fazuredeploy-asa-standard.json)|
+| Enterprise|[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmoarychan%2FASA-Samples-Web-Application%2Fquickstart%2Finfra%2Fazuredeploy.json)|
 
 
 

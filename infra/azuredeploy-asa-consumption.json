@@ -1,0 +1,68 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/subscriptionDeploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "environmentName": {
+      "type": "string",
+      "metadata": {
+        "description": "Name of the environment which is used to generate a short unique hash used in all resources."
+      },
+      "maxLength": 64,
+      "minLength": 1
+    },
+    "location": {
+      "type": "string",
+      "metadata": {
+        "description": "Primary location for all resources"
+      },
+      "minLength": 1
+    },
+    "psqlAdminPassword": {
+      "type": "securestring",
+      "metadata": {
+        "description": "The password for the PostgreSQL Server administrator."
+      }
+    },
+    "psqlUserPassword": {
+      "type": "securestring",
+      "metadata": {
+        "description": "The password for the PostgreSQL application user, which will be used in the application."
+      }
+    }
+  },
+  "resources": [
+    {
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2022-09-01",
+      "name": "[format('{0}--asa-con', deployment().name)]",
+      "location": "[parameters('location')]",
+      "properties": {
+        "expressionEvaluationOptions": {
+          "scope": "inner"
+        },
+        "mode": "Incremental",
+        "parameters": {
+          "plan": {
+            "value": "consumption"
+          },
+          "environmentName": {
+            "value": "[parameters('environmentName')]"
+          },
+          "location": {
+            "value": "[parameters('location')]"
+          },
+          "psqlAdminPassword": {
+            "value": "[parameters('psqlAdminPassword')]"
+          },
+          "psqlUserPassword": {
+            "value": "[parameters('psqlUserPassword')]"
+          }
+        },
+        "templateLink": {
+          "relativePath": "azuredeploy.json",
+          "contentVersion":"1.0.0.0"
+        }
+      }
+    }
+  ]
+}

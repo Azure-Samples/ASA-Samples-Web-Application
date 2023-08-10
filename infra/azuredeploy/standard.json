@@ -1,11 +1,11 @@
 {
-  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/subscriptionDeploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "metadata": {
     "_generator": {
       "name": "bicep",
-      "version": "0.18.4.5664",
-      "templateHash": "17541161375002195629"
+      "version": "0.20.4.51522",
+      "templateHash": "11586074179217770493"
     }
   },
   "parameters": {
@@ -38,10 +38,10 @@
   },
   "variables": {
     "const_ownerRole": "[concat('/subscriptions/', subscription().subscriptionId, '/providers/Microsoft.Authorization/roleDefinitions/', '8e3af657-a8ff-443c-a75c-2fe8c4bcb635')]",
-    "const_scriptLocation": "https://raw.githubusercontent.com/saragluna/ASA-Samples-Web-Application/quickstart/infra/deploy-to-azure",
+    "const_scriptLocation": "https://raw.githubusercontent.com/moarychan/ASA-Samples-Web-Application/moary/support-deploy-to-azure-button/infra/azuredeploy/",
     "const_uploadScriptName": "upload-jar-to-asa.sh",
     "ref_identityId": "[resourceId('Microsoft.ManagedIdentity/userAssignedIdentities', parameters('userAssignedManagedIdentityName'))]",
-    "name_deploymentScriptName": "asa-deployment-script",
+    "name_deploymentScriptName": "asa-standard-deployment-script",
     "name_roleAssignmentName": "[guid(format('{0}{1}Role assignment in group{0}', resourceGroup().name, variables('ref_identityId')))]"
   },
   "resources": [
@@ -52,8 +52,8 @@
       "location": "[parameters('location')]",
       "tags": "[parameters('tags')]",
       "sku": {
-        "name": "B0",
-        "tier": "Basic"
+        "name": "S0",
+        "tier": "Standard"
       }
     },
     {
