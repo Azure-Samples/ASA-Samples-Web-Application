@@ -1,13 +1,6 @@
 {
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
-  "metadata": {
-    "_generator": {
-      "name": "bicep",
-      "version": "0.13.1.58284",
-      "templateHash": "13120038605368246703"
-    }
-  },
   "parameters": {
     "storageAccountType": {
       "type": "string",
