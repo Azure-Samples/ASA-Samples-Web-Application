@@ -385,7 +385,7 @@
             "value": "[union(variables('tags'), createObject('asa-service-name', variables('appName')))]"
           },
           "asaInstanceName": {
-            "value": "[concat(variables('asaInstanceName'), '-', parameters('plan'))]"
+            "value": "[concat(variables('asaInstanceName'), '-', 'standard')]"
           },
           "databaseUsername": {
             "value": "[variables('psqlUserName')]"
@@ -397,7 +397,7 @@
             "value": "[variables('datasourceJdbcUrl')]"
           },
           "userAssignedManagedIdentityName": {
-            "value": "[concat(variables('userAssignedManagedIdentityName'), '-', parameters('plan'))]"
+            "value": "[concat(variables('userAssignedManagedIdentityName'), '-', 'standard')]"
           }
         },
         "template": {
