@@ -32,7 +32,6 @@
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2022-09-01",
       "name": "[format('{0}--asa-con', deployment().name)]",
-      "location": "[parameters('location')]",
       "properties": {
         "expressionEvaluationOptions": {
           "scope": "inner"
