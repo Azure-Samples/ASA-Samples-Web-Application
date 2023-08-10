@@ -9,7 +9,8 @@
       },
       "allowedValues": [
         "consumption",
-        "standard"
+        "standard",
+        "enterprise"
       ],
       "defaultValue": "consumption"
     },
