@@ -60,6 +60,7 @@
   </dependencies>
 
   <build>
+    <finalName>simple-todo-web</finalName>
     <sourceDirectory>src/main/java</sourceDirectory>
     <resources>
       <resource>
