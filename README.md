@@ -16,7 +16,6 @@ name: React Web App with Java API and PostgreSQL - Flexible Server on Azure Spri
 description: A complete ToDo app on Azure Spring Apps with Java API and Azure Database for PostgreSQL flexible server for storage. Uses Azure Developer CLI (azd) to build, deploy, and run
 ---
 <!-- YAML front-matter schema: https://review.learn.microsoft.com/en-us/help/contribute/samples/process/onboarding?branch=main#supported-metadata-fields-for-readmemd -->
-
 # React Web App with Java API and PostgreSQL - Flexible Server on Azure Spring Apps
 
 A blueprint for getting a React web app with a Java API and a PostgreSQL - Flexible Server on Azure. The blueprint includes sample application code (a ToDo web app) which can be removed and replaced with your own application code. Add your own source code and leverage the Infrastructure as Code assets (written in Bicep) to get up and running quickly. This architecture is for running containerized apps or microservices on a serverless platform.
@@ -30,8 +29,8 @@ Let's jump in and get this up and running in Azure. When you are finished, you w
 | Deploy to Azure Spring Apps | |
 |--|--|
 | Consumption plan|[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure-Samples%2FASA-Samples-Web-Application%2Fquickstart%2Finfra%2Fazuredeploy-asa-consumption.json)|
-| Basic/Standard|  [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure-Samples%2FASA-Samples-Web-Application%2Fquickstart%2Finfra%2Fazuredeploy-asa-standard.json)|
-| Enterprise|Not support|
+| Basic/Standard plan|[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure-Samples%2FASA-Samples-Web-Application%2Fquickstart%2Finfra%2Fazuredeploy-asa-standard.json)|
+| Enterprise plan|Not support|
 
 ### Prerequisites
 
