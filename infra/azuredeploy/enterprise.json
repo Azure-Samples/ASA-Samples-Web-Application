@@ -219,7 +219,7 @@
     {
       "type": "Microsoft.Resources/deploymentScripts",
       "apiVersion": "2020-10-01",
-      "name": "[variables('const_checkingBuilderStateDeploymentName'))]",
+      "name": "[variables('const_checkingBuilderStateDeploymentName')]",
       "location": "[parameters('location')]",
       "dependsOn": [
         "[resourceId('Microsoft.Authorization/roleAssignments', variables('name_roleAssignmentName'))]",
