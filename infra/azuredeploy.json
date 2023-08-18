@@ -1,0 +1,460 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "plan": {
+      "type": "string",
+      "metadata": {
+        "description": "Name of the pricing tier which determines the resource and cost associated with your instance."
+      },
+      "allowedValues": [
+        "consumption",
+        "standard",
+        "enterprise"
+      ],
+      "defaultValue": "consumption"
+    },
+    "location": {
+      "type": "string",
+      "metadata": {
+        "description": "Primary location for all resources"
+      },
+      "minLength": 1
+    },
+    "postgreSQLAdminPassword": {
+      "type": "securestring",
+      "metadata": {
+        "description": "The password for the PostgreSQL Server administrator."
+      }
+    },
+    "postgreSQLUserPassword": {
+      "type": "securestring",
+      "metadata": {
+        "description": "The password for the PostgreSQL application user, which will be used in the application."
+      }
+    }
+  },
+  "variables": {
+    "$fxv#0": {
+      "analysisServicesServers": "as",
+      "apiManagementService": "apim-",
+      "appConfigurationConfigurationStores": "appcs-",
+      "appManagedEnvironments": "cae-",
+      "appContainerApps": "ca-",
+      "authorizationPolicyDefinitions": "policy-",
+      "automationAutomationAccounts": "aa-",
+      "blueprintBlueprints": "bp-",
+      "blueprintBlueprintsArtifacts": "bpa-",
+      "cacheRedis": "redis-",
+      "cdnProfiles": "cdnp-",
+      "cdnProfilesEndpoints": "cdne-",
+      "cognitiveServicesAccounts": "cog-",
+      "cognitiveServicesFormRecognizer": "cog-fr-",
+      "cognitiveServicesTextAnalytics": "cog-ta-",
+      "computeAvailabilitySets": "avail-",
+      "computeCloudServices": "cld-",
+      "computeDiskEncryptionSets": "des",
+      "computeDisks": "disk",
+      "computeDisksOs": "osdisk",
+      "computeGalleries": "gal",
+      "computeSnapshots": "snap-",
+      "computeVirtualMachines": "vm",
+      "computeVirtualMachineScaleSets": "vmss-",
+      "containerInstanceContainerGroups": "ci",
+      "containerRegistryRegistries": "cr",
+      "containerServiceManagedClusters": "aks-",
+      "databricksWorkspaces": "dbw-",
+      "dataFactoryFactories": "adf-",
+      "dataLakeAnalyticsAccounts": "dla",
+      "dataLakeStoreAccounts": "dls",
+      "dataMigrationServices": "dms-",
+      "dBforMySQLServers": "mysql-",
+      "dBforPostgreSQLServers": "psql-",
+      "devicesIotHubs": "iot-",
+      "devicesProvisioningServices": "provs-",
+      "devicesProvisioningServicesCertificates": "pcert-",
+      "documentDBDatabaseAccounts": "cosmos-",
+      "eventGridDomains": "evgd-",
+      "eventGridDomainsTopics": "evgt-",
+      "eventGridEventSubscriptions": "evgs-",
+      "eventHubNamespaces": "evhns-",
+      "eventHubNamespacesEventHubs": "evh-",
+      "hdInsightClustersHadoop": "hadoop-",
+      "hdInsightClustersHbase": "hbase-",
+      "hdInsightClustersKafka": "kafka-",
+      "hdInsightClustersMl": "mls-",
+      "hdInsightClustersSpark": "spark-",
+      "hdInsightClustersStorm": "storm-",
+      "hybridComputeMachines": "arcs-",
+      "insightsActionGroups": "ag-",
+      "insightsComponents": "appi-",
+      "keyVaultVaults": "kv-",
+      "kubernetesConnectedClusters": "arck",
+      "kustoClusters": "dec",
+      "kustoClustersDatabases": "dedb",
+      "logicIntegrationAccounts": "ia-",
+      "logicWorkflows": "logic-",
+      "machineLearningServicesWorkspaces": "mlw-",
+      "managedIdentityUserAssignedIdentities": "id-",
+      "managementManagementGroups": "mg-",
+      "migrateAssessmentProjects": "migr-",
+      "networkApplicationGateways": "agw-",
+      "networkApplicationSecurityGroups": "asg-",
+      "networkAzureFirewalls": "afw-",
+      "networkBastionHosts": "bas-",
+      "networkConnections": "con-",
+      "networkDnsZones": "dnsz-",
+      "networkExpressRouteCircuits": "erc-",
+      "networkFirewallPolicies": "afwp-",
+      "networkFirewallPoliciesWebApplication": "waf",
+      "networkFirewallPoliciesRuleGroups": "wafrg",
+      "networkFrontDoors": "fd-",
+      "networkFrontdoorWebApplicationFirewallPolicies": "fdfp-",
+      "networkLoadBalancersExternal": "lbe-",
+      "networkLoadBalancersInternal": "lbi-",
+      "networkLoadBalancersInboundNatRules": "rule-",
+      "networkLocalNetworkGateways": "lgw-",
+      "networkNatGateways": "ng-",
+      "networkNetworkInterfaces": "nic-",
+      "networkNetworkSecurityGroups": "nsg-",
+      "networkNetworkSecurityGroupsSecurityRules": "nsgsr-",
+      "networkNetworkWatchers": "nw-",
+      "networkPrivateDnsZones": "pdnsz-",
+      "networkPrivateLinkServices": "pl-",
+      "networkPublicIPAddresses": "pip-",
+      "networkPublicIPPrefixes": "ippre-",
+      "networkRouteFilters": "rf-",
+      "networkRouteTables": "rt-",
+      "networkRouteTablesRoutes": "udr-",
+      "networkTrafficManagerProfiles": "traf-",
+      "networkVirtualNetworkGateways": "vgw-",
+      "networkVirtualNetworks": "vnet-",
+      "networkVirtualNetworksSubnets": "snet-",
+      "networkVirtualNetworksVirtualNetworkPeerings": "peer-",
+      "networkVirtualWans": "vwan-",
+      "networkVpnGateways": "vpng-",
+      "networkVpnGatewaysVpnConnections": "vcn-",
+      "networkVpnGatewaysVpnSites": "vst-",
+      "notificationHubsNamespaces": "ntfns-",
+      "notificationHubsNamespacesNotificationHubs": "ntf-",
+      "operationalInsightsWorkspaces": "log-",
+      "portalDashboards": "dash-",
+      "powerBIDedicatedCapacities": "pbi-",
+      "purviewAccounts": "pview-",
+      "postgresServer": "pg-",
+      "recoveryServicesVaults": "rsv-",
+      "resourcesResourceGroups": "rg-",
+      "searchSearchServices": "srch-",
+      "serviceBusNamespaces": "sb-",
+      "serviceBusNamespacesQueues": "sbq-",
+      "serviceBusNamespacesTopics": "sbt-",
+      "serviceEndPointPolicies": "se-",
+      "serviceFabricClusters": "sf-",
+      "signalRServiceSignalR": "sigr",
+      "springApps": "asa-",
+      "sqlManagedInstances": "sqlmi-",
+      "sqlServers": "sql-",
+      "sqlServersDataWarehouse": "sqldw-",
+      "sqlServersDatabases": "sqldb-",
+      "sqlServersDatabasesStretch": "sqlstrdb-",
+      "storageStorageAccounts": "st",
+      "storageStorageAccountsVm": "stvm",
+      "storSimpleManagers": "ssimp",
+      "streamAnalyticsCluster": "asa-",
+      "synapseWorkspaces": "syn",
+      "synapseWorkspacesAnalyticsWorkspaces": "synw",
+      "synapseWorkspacesSqlPoolsDedicated": "syndp",
+      "synapseWorkspacesSqlPoolsSpark": "synsp",
+      "timeSeriesInsightsEnvironments": "tsi-",
+      "webServerFarms": "plan-",
+      "webSitesAppService": "app-",
+      "webSitesAppServiceEnvironment": "ase-",
+      "webSitesFunctions": "func-",
+      "webStaticSites": "stapp-"
+    },
+    "abbrs": "[variables('$fxv#0')]",
+    "resourceToken": "[toLower(uniqueString(subscription().id, resourceGroup().name, parameters('location')))]",
+    "asaInstanceName": "[format('{0}{1}', variables('abbrs').springApps, variables('resourceToken'))]",
+    "appName": "simple-todo-web",
+    "psqlServerName": "[format('{0}{1}', variables('abbrs').postgresServer, variables('resourceToken'))]",
+    "databaseName": "Todo",
+    "datasourceJdbcUrl": "[concat('jdbc:postgresql://', variables('psqlServerName'), '.postgres.database.azure.com:5432/', variables('databaseName'))]",
+    "psqlAdminName": "psqladmin",
+    "psqlUserName": "psqluser",
+    "userAssignedManagedIdentityName": "[format('{0}{1}', variables('abbrs').managedIdentityUserAssignedIdentities, variables('resourceToken'))]",
+    "tags": {
+      "spring-cloud-azure": "true",
+      "deploy-to-azure-button": "true"
+    }
+  },
+  "resources": [
+    {
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2022-09-01",
+      "name": "[format('{0}--pg', deployment().name)]",
+      "properties": {
+        "expressionEvaluationOptions": {
+          "scope": "inner"
+        },
+        "mode": "Incremental",
+        "parameters": {
+          "serverName": {
+            "value": "[variables('psqlServerName')]"
+          },
+          "location": {
+            "value": "[parameters('location')]"
+          },
+          "tags": {
+            "value": "[variables('tags')]"
+          },
+          "psqlAdminName": {
+            "value": "[variables('psqlAdminName')]"
+          },
+          "psqlUserName": {
+            "value": "[variables('psqlUserName')]"
+          },
+          "postgreSQLAdminPassword": {
+            "value": "[parameters('postgreSQLAdminPassword')]"
+          },
+          "postgreSQLUserPassword": {
+            "value": "[parameters('postgreSQLUserPassword')]"
+          },
+          "databaseName": {
+            "value": "[variables('databaseName')]"
+          }
+        },
+        "template": {
+          "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+          "contentVersion": "1.0.0.0",
+          "metadata": {
+            "_generator": {
+              "name": "bicep",
+              "version": "0.18.4.5664",
+              "templateHash": "1996469036368566872"
+            }
+          },
+          "parameters": {
+            "serverName": {
+              "type": "string"
+            },
+            "location": {
+              "type": "string",
+              "defaultValue": "[resourceGroup().location]"
+            },
+            "tags": {
+              "type": "object",
+              "defaultValue": {}
+            },
+            "psqlAdminName": {
+              "type": "string"
+            },
+            "psqlUserName": {
+              "type": "string"
+            },
+            "postgreSQLAdminPassword": {
+              "type": "securestring"
+            },
+            "postgreSQLUserPassword": {
+              "type": "securestring"
+            },
+            "databaseName": {
+              "type": "string",
+              "defaultValue": "todo"
+            },
+            "version": {
+              "type": "string",
+              "defaultValue": "14"
+            }
+          },
+          "resources": [
+            {
+              "type": "Microsoft.DBforPostgreSQL/flexibleServers/databases",
+              "apiVersion": "2022-12-01",
+              "name": "[format('{0}/{1}', parameters('serverName'), parameters('databaseName'))]",
+              "properties": {
+                "charset": "utf8",
+                "collation": "en_US.utf8"
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.DBforPostgreSQL/flexibleServers', parameters('serverName'))]"
+              ]
+            },
+            {
+              "type": "Microsoft.DBforPostgreSQL/flexibleServers/firewallRules",
+              "apiVersion": "2022-12-01",
+              "name": "[format('{0}/{1}', parameters('serverName'), 'allow-all-IPs')]",
+              "properties": {
+                "startIpAddress": "0.0.0.0",
+                "endIpAddress": "255.255.255.255"
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.DBforPostgreSQL/flexibleServers', parameters('serverName'))]"
+              ]
+            },
+            {
+              "type": "Microsoft.DBforPostgreSQL/flexibleServers",
+              "apiVersion": "2022-12-01",
+              "name": "[parameters('serverName')]",
+              "location": "[parameters('location')]",
+              "tags": "[parameters('tags')]",
+              "sku": {
+                "name": "Standard_D4s_v3",
+                "tier": "GeneralPurpose"
+              },
+              "properties": {
+                "version": "[parameters('version')]",
+                "administratorLogin": "[parameters('psqlAdminName')]",
+                "administratorLoginPassword": "[parameters('postgreSQLAdminPassword')]",
+                "storage": {
+                  "storageSizeGB": 32
+                },
+                "availabilityZone": "1",
+                "highAvailability": {
+                  "mode": "Disabled"
+                },
+                "authConfig": {
+                  "activeDirectoryAuth": "Disabled",
+                  "passwordAuth": "Enabled",
+                  "tenantId": "[subscription().tenantId]"
+                }
+              }
+            },
+            {
+              "type": "Microsoft.Resources/deploymentScripts",
+              "apiVersion": "2020-10-01",
+              "name": "psql-deployment-script",
+              "location": "[parameters('location')]",
+              "kind": "AzureCLI",
+              "properties": {
+                "azCliVersion": "2.40.0",
+                "retentionInterval": "PT1H",
+                "timeout": "PT5M",
+                "cleanupPreference": "OnSuccess",
+                "environmentVariables": [
+                  {
+                    "name": "PSQLADMINNAME",
+                    "value": "[parameters('psqlAdminName')]"
+                  },
+                  {
+                    "name": "PSQLADMINPASSWORD",
+                    "secureValue": "[parameters('postgreSQLAdminPassword')]"
+                  },
+                  {
+                    "name": "PSQLUSERNAME",
+                    "value": "[parameters('psqlUserName')]"
+                  },
+                  {
+                    "name": "PSQLUSERPASSWORD",
+                    "secureValue": "[parameters('postgreSQLUserPassword')]"
+                  },
+                  {
+                    "name": "DBNAME",
+                    "value": "[parameters('databaseName')]"
+                  },
+                  {
+                    "name": "DBSERVER",
+                    "value": "[parameters('serverName')]"
+                  }
+                ],
+                "scriptContent": "apk add postgresql-client\n\ncat << EOF > create_user.sql\nCREATE ROLE \"$PSQLUSERNAME\" WITH LOGIN PASSWORD '$PSQLUSERPASSWORD';\nGRANT ALL PRIVILEGES ON DATABASE $DBNAME TO \"$PSQLUSERNAME\";\nEOF\n\npsql \"host=$DBSERVER.postgres.database.azure.com user=$PSQLADMINNAME dbname=$DBNAME port=5432 password=$PSQLADMINPASSWORD sslmode=require\" < create_user.sql\n    "
+              },
+              "dependsOn": [
+                "[resourceId('Microsoft.DBforPostgreSQL/flexibleServers', parameters('serverName'))]"
+              ]
+            }
+          ],
+          "outputs": {
+            "POSTGRES_DOMAIN_NAME": {
+              "type": "string",
+              "value": "[reference(resourceId('Microsoft.DBforPostgreSQL/flexibleServers', parameters('serverName')), '2022-12-01').fullyQualifiedDomainName]"
+            }
+          }
+        }
+      }
+    },
+    {
+      "condition": "[equals(parameters('plan'), 'consumption')]",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2022-09-01",
+      "name": "[format('{0}--ard2', deployment().name)]",
+      "properties": {
+        "expressionEvaluationOptions": {
+          "scope": "inner"
+        },
+        "mode": "Incremental",
+        "parameters": {
+          "location": {
+            "value": "[parameters('location')]"
+          },
+          "appName": {
+            "value": "[variables('appName')]"
+          },
+          "tags": {
+            "value": "[union(variables('tags'), createObject('asa-service-name', variables('appName')))]"
+          },
+          "asaInstanceName": {
+            "value": "[concat(variables('asaInstanceName'), '-', parameters('plan'))]"
+          },
+          "databaseUsername": {
+            "value": "[variables('psqlUserName')]"
+          },
+          "databasePassword": {
+            "value": "[parameters('postgreSQLUserPassword')]"
+          },
+          "datasourceUrl": {
+            "value": "[variables('datasourceJdbcUrl')]"
+          },
+          "userAssignedManagedIdentityName": {
+            "value": "[concat(variables('userAssignedManagedIdentityName'), '-', parameters('plan'))]"
+          }
+        },
+        "templateLink": {
+          "relativePath": "azuredeploy/consumption.json",
+          "contentVersion":"1.0.0.0"
+        }
+      }
+    },
+    {
+      "condition": "[equals(parameters('plan'), 'standard')]",
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2022-09-01",
+      "name": "[format('{0}--ard', deployment().name)]",
+      "properties": {
+        "expressionEvaluationOptions": {
+          "scope": "inner"
+        },
+        "mode": "Incremental",
+        "parameters": {
+          "location": {
+            "value": "[parameters('location')]"
+          },
+          "appName": {
+            "value": "[variables('appName')]"
+          },
+          "tags": {
+            "value": "[union(variables('tags'), createObject('asa-service-name', variables('appName')))]"
+          },
+          "asaInstanceName": {
+            "value": "[concat(variables('asaInstanceName'), '-', parameters('plan'))]"
+          },
+          "databaseUsername": {
+            "value": "[variables('psqlUserName')]"
+          },
+          "databasePassword": {
+            "value": "[parameters('postgreSQLUserPassword')]"
+          },
+          "datasourceUrl": {
+            "value": "[variables('datasourceJdbcUrl')]"
+          },
+          "userAssignedManagedIdentityName": {
+            "value": "[concat(variables('userAssignedManagedIdentityName'), '-', parameters('plan'))]"
+          }
+        },
+        "templateLink": {
+          "relativePath": "azuredeploy/standard.json",
+          "contentVersion":"1.0.0.0"
+        }
+      }
+    }
+  ]
+}

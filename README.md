@@ -26,6 +26,12 @@ Let's jump in and get this up and running in Azure. When you are finished, you w
 
 <sup>Screenshot of the deployed ToDo app</sup>
 
+| Deploy to Azure Spring Apps | |
+|--|--|
+| Consumption plan|[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure-Samples%2FASA-Samples-Web-Application%2Fquickstart%2Finfra%2Fazuredeploy-asa-consumption.json)|
+| Basic/Standard plan|[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure-Samples%2FASA-Samples-Web-Application%2Fquickstart%2Finfra%2Fazuredeploy-asa-standard.json)|
+| Enterprise plan|Not support|
+
 ### Prerequisites
 
 The following prerequisites are required to use this application. Please ensure that you have them all installed locally.
