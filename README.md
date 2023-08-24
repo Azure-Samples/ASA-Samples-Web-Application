@@ -26,6 +26,8 @@ Let's jump in and get this up and running in Azure. When you are finished, you w
 
 <sup>Screenshot of the deployed ToDo app</sup>
 
+Before delving into the step-by-step execution of the application, you can simply click the Deploy to Azure button. This will instantly deploy the app to Azure Spring Apps.
+
 | Deploy to Azure Spring Apps | |
 |--|--|
 | Consumption plan|[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure-Samples%2FASA-Samples-Web-Application%2Fquickstart%2Finfra%2Fazuredeploy-asa-consumption.json)|
