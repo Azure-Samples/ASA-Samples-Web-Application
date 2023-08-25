@@ -27,7 +27,7 @@
         "mode": "Incremental",
         "parameters": {
           "plan": {
-            "value": "standard"
+            "value": "enterprise"
           },
           "location": {
             "value": "[resourceGroup().location]"
