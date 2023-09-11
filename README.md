@@ -66,6 +66,14 @@ azd init --template Azure-Samples/ASA-Samples-Web-Application
 azd up
 ```
 
+The template uses Azure Spring Apps [Standard consumption and dedicated plan](https://learn.microsoft.com/azure/spring-apps/overview#standard-consumption-and-dedicated-plan) by default. If you want to switch to `Standard` plan, you can use the following command before running `azd up`.
+
+```bash
+azd env set PLAN standard
+```
+
+If you have already provisioned the resources with the Standard consumption and dedicated plan and want to try the Standard plan, you need to run `azd down` first to delete the resources, and then run the above command and `azd up` again to provision and deploy.
+
 ### Application Architecture
 
 This application utilizes the following Azure resources:
