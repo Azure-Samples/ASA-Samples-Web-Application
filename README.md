@@ -9,7 +9,7 @@ languages:
 products:
 - azure
 - azure-spring-apps
-- azure-postgresql
+- azure-database-postgresql
 - azure-key-vault
 - azure-pipelines
 - ms-build-openjdk
