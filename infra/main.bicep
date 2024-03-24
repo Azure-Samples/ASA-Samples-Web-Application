@@ -94,3 +94,5 @@ module springAppsStandard 'modules/springapps/springappsStandard.bicep' = if (pl
 	datasourceUrl: datasourceJdbcUrl
   }
 }
+
+output AZURE_RESOURCE_GROUP string = rg.name
