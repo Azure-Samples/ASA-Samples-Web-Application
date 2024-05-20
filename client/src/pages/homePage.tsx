@@ -42,7 +42,7 @@ const HomePage = () => {
             const defaultList = appContext.state.lists[0];
             appContext.updateListId(`${defaultList.id}`);
         }
-    }, [appContext.state.lists, appContext.state.selectedList, listId])
+    }, [appContext, listId])
 
     // React to selected list changes
     useEffect(() => {
