@@ -15,8 +15,13 @@ export abstract class RestService<T extends Entity> {
     protected client: AxiosInstance;
 
     public constructor(baseUrl: string, baseRoute: string) {
+        let currentBaseUrl = baseUrl;
+        if (window?.location?.pathname !== "/"
+            && window?.location?.pathname?.lastIndexOf("/default/") !== -1) {
+            currentBaseUrl = window.location.pathname;
+        }
         this.client = axios.create({
-            baseURL: `${baseUrl}${baseRoute}`
+            baseURL: `${currentBaseUrl}${baseRoute}`
         });
     }
 

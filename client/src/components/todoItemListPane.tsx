@@ -1,8 +1,9 @@
 import { CommandBar, DetailsList, DetailsListLayoutMode, IStackStyles, Selection, Label, Spinner, SpinnerSize, Stack, IIconProps, SearchBox, Text, IGroup, IColumn, MarqueeSelection, FontIcon, IObjectWithKey, CheckboxVisibility, IDetailsGroupRenderProps, getTheme } from '@fluentui/react';
-import React, { ReactElement, useEffect, useState, FormEvent, FC } from 'react';
-import { useNavigate } from 'react-router';
+import React, {ReactElement, useEffect, useState, FormEvent, FC, useContext} from 'react';
 import { TodoItem, TodoItemState, TodoList } from '../models';
 import { stackItemPadding } from '../ux/styles';
+import {AppContext} from "../models/applicationState";
+import {TodoContext} from "./todoContext";
 
 interface TodoItemListPaneProps {
     list?: TodoList
@@ -53,8 +54,8 @@ const stackStyles: IStackStyles = {
 }
 
 const TodoItemListPane: FC<TodoItemListPaneProps> = (props: TodoItemListPaneProps): ReactElement => {
+    const appContext = useContext<AppContext>(TodoContext)
     const theme = getTheme();
-    const navigate = useNavigate();
     const [newItemName, setNewItemName] = useState('');
     const [items, setItems] = useState(createListItems(props.items || []));
     const [selectedItems, setSelectedItems] = useState<TodoItem[]>([]);
@@ -140,7 +141,8 @@ const TodoItemListPane: FC<TodoItemListPaneProps> = (props: TodoItemListPaneProp
     }
 
     const selectItem = (item: TodoDisplayItem) => {
-        navigate(`/lists/${item.data.listId}/items/${item.data.id}`);
+        appContext.updateListId(`${item.data.listId}`);
+        appContext.updateItemId(`${item.data.id}`);
     }
 
     const completeItems = () => {
