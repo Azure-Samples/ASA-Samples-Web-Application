@@ -1,5 +1,5 @@
-import React, { useReducer, FC } from 'react';
-import { BrowserRouter } from 'react-router-dom';
+import React, {useReducer, FC, useState} from 'react';
+import { HashRouter } from 'react-router-dom';
 import Layout from './layout/layout';
 import './App.css';
 import { DarkTheme } from './ux/theme';
@@ -11,20 +11,29 @@ import { ThemeProvider } from '@fluentui/react';
 import Telemetry from './components/telemetry';
 
 export const App: FC = () => {
+  const [listId, setListId] = useState("")
+  const [itemId, setItemId] = useState("")
+
   const defaultState: ApplicationState = getDefaultState();
   const [applicationState, dispatch] = useReducer(appReducer, defaultState);
-  const initialContext: AppContext = { state: applicationState, dispatch: dispatch }
+  const updateListId = (newListId: string)=> {
+      setListId(newListId);
+  }
+  const updateItemId = (newItemId: string)=> {
+      setItemId(newItemId);
+  }
+  const initialContext: AppContext = { state: applicationState, dispatch: dispatch, listId, updateListId, itemId, updateItemId }
 
   initializeIcons();
 
   return (
     <ThemeProvider applyTo="body" theme={DarkTheme}>
       <TodoContext.Provider value={initialContext}>
-        <BrowserRouter>
+        <HashRouter>
           <Telemetry>
             <Layout />
           </Telemetry>
-        </BrowserRouter>
+        </HashRouter>
       </TodoContext.Provider>
     </ThemeProvider>
   );
