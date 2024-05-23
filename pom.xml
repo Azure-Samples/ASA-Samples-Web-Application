@@ -11,7 +11,7 @@
 
   <groupId>com.microsoft.azure.simpletodo</groupId>
   <artifactId>simple-todo-parent</artifactId>
-  <version>0.0.2</version>
+  <version>0.0.3-SNAPSHOT</version>
   <name>SimpleTodo Parent</name>
   <description>Simple Todo application parent</description>
   <packaging>pom</packaging>
