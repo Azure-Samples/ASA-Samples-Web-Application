@@ -2,6 +2,7 @@
   "name": "react-fluent",
   "version": "0.1.0",
   "private": true,
+  "homepage": "./",
   "dependencies": {
     "@fluentui/react": "^8.73.0",
     "@microsoft/applicationinsights-react-js": "^3.3.4",
