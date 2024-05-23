@@ -15,8 +15,19 @@ export abstract class RestService<T extends Entity> {
     protected client: AxiosInstance;
 
     public constructor(baseUrl: string, baseRoute: string) {
+        let currentBaseUrl = baseUrl;
+        // Override the base url when using app test endpoint of ASA.
+        if (window?.location?.pathname !== "/"
+            && window?.location?.pathname?.length >= 14
+            && window?.location?.pathname?.lastIndexOf("/default/") !== -1) {
+            if (window.location.pathname.endsWith("/")) {
+                currentBaseUrl = window.location.pathname.substring(0, window.location.pathname.length - 1);
+            } else {
+                currentBaseUrl = window.location.pathname;
+            }
+        }
         this.client = axios.create({
-            baseURL: `${baseUrl}${baseRoute}`
+            baseURL: `${currentBaseUrl}${baseRoute}`
         });
     }
 
