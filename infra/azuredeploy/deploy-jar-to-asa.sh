@@ -33,8 +33,8 @@ if [[ -z "$ASA_SERVICE_NAME" ]]; then
   exit 1
 fi
 
-jar_file_name="simple-todo-web-0.0.1.jar"
-source_url="https://github.com/Azure-Samples/ASA-Samples-Web-Application/releases/download/v0.0.1/$jar_file_name"
+jar_file_name="simple-todo-web-0.0.2.jar"
+source_url="https://github.com/Azure-Samples/ASA-Samples-Web-Application/releases/download/v0.0.2/$jar_file_name"
 auth_header="no-auth"
 
 # Download binary
