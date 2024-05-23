@@ -1,8 +1,9 @@
 import { IIconProps, INavLink, INavLinkGroup, Nav, Stack, TextField } from '@fluentui/react';
-import React, { FC, ReactElement, useState, FormEvent, MouseEvent } from 'react';
-import { useNavigate } from 'react-router';
+import React, {FC, ReactElement, useState, FormEvent, MouseEvent, useContext} from 'react';
 import { TodoList } from '../models/todoList';
 import { stackItemPadding } from '../ux/styles';
+import {AppContext} from "../models/applicationState";
+import {TodoContext} from "./todoContext";
 
 interface TodoListMenuProps {
     selectedList?: TodoList
@@ -15,7 +16,7 @@ const iconProps: IIconProps = {
 }
 
 const TodoListMenu: FC<TodoListMenuProps> = (props: TodoListMenuProps): ReactElement => {
-    const navigate = useNavigate();
+    const appContext = useContext<AppContext>(TodoContext)
     const [newListName, setNewListName] = useState('');
 
     const onNavLinkClick = (evt?: MouseEvent<HTMLElement>, item?: INavLink) => {
@@ -25,7 +26,7 @@ const TodoListMenu: FC<TodoListMenuProps> = (props: TodoListMenuProps): ReactEle
             return;
         }
 
-        navigate(`/lists/${item.key}`);
+        appContext.updateListId(`${item.key}`);
     }
 
     const createNavGroups = (lists: TodoList[]): INavLinkGroup[] => {

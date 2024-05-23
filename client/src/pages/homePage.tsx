@@ -1,7 +1,13 @@
-import React, { useEffect, useContext, useMemo, useState, Fragment } from 'react';
+import React, {
+    useEffect,
+    useContext,
+    useMemo,
+    useState,
+    Fragment,
+} from 'react';
 import { IconButton, IContextualMenuProps, IIconProps, Stack, Text, Shimmer, ShimmerElementType } from '@fluentui/react';
 import TodoItemListPane from '../components/todoItemListPane';
-import { TodoItem, TodoItemState } from '../models';
+import {TodoItem, TodoItemState} from '../models';
 import * as itemActions from '../actions/itemActions';
 import * as listActions from '../actions/listActions';
 import { TodoContext } from '../components/todoContext';
@@ -9,14 +15,13 @@ import { AppContext } from '../models/applicationState';
 import { ItemActions } from '../actions/itemActions';
 import { ListActions } from '../actions/listActions';
 import { stackItemPadding, stackPadding, titleStackStyles } from '../ux/styles';
-import { useNavigate, useParams } from 'react-router-dom';
 import { bindActionCreators } from '../actions/actionCreators';
 import { withApplicationInsights } from '../components/telemetry';
 
 const HomePage = () => {
-    const navigate = useNavigate();
     const appContext = useContext<AppContext>(TodoContext)
-    const { listId, itemId } = useParams();
+    const listId = appContext.listId;
+    const itemId = appContext.itemId;
     const actions = useMemo(() => ({
         lists: bindActionCreators(listActions, appContext.dispatch) as unknown as ListActions,
         items: bindActionCreators(itemActions, appContext.dispatch) as unknown as ItemActions,
@@ -35,9 +40,9 @@ const HomePage = () => {
     useEffect(() => {
         if (appContext.state.lists?.length && !listId && !appContext.state.selectedList) {
             const defaultList = appContext.state.lists[0];
-            navigate(`/lists/${defaultList.id}`);
+            appContext.updateListId(`${defaultList.id}`);
         }
-    }, [appContext.state.lists, appContext.state.selectedList, listId, navigate])
+    }, [appContext, listId])
 
     // React to selected list changes
     useEffect(() => {
@@ -60,7 +65,6 @@ const HomePage = () => {
                 await actions.items.list(listId);
                 setIsReady(true)
             }
-
             loadListItems(appContext.state.selectedList.id)
         }
     }, [actions.items, appContext.state.selectedList?.id, appContext.state.selectedList?.items])
@@ -82,14 +86,16 @@ const HomePage = () => {
     const onItemDeleted = (item: TodoItem) => {
         if (item.id) {
             actions.items.remove(item.listId, item);
-            navigate(`/lists/${item.listId}`);
+            appContext.updateItemId("");
+            appContext.updateListId(`${item.listId}`);
         }
     }
 
     const deleteList = () => {
         if (appContext.state.selectedList?.id) {
             actions.lists.remove(appContext.state.selectedList.id);
-            navigate('/lists');
+            appContext.updateItemId("");
+            appContext.updateListId("");
         }
     }
 

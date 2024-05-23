@@ -1,7 +1,7 @@
 import React, { FC, ReactElement, useContext, useEffect, useMemo } from 'react';
 import Header from './header';
 import Sidebar from './sidebar';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import HomePage from '../pages/homePage';
 import { Stack } from '@fluentui/react';
 import { AppContext } from '../models/applicationState';
@@ -16,7 +16,6 @@ import TodoItemDetailPane from '../components/todoItemDetailPane';
 import { bindActionCreators } from '../actions/actionCreators';
 
 const Layout: FC = (): ReactElement => {
-    const navigate = useNavigate();
     const appContext = useContext<AppContext>(TodoContext)
     const actions = useMemo(() => ({
         lists: bindActionCreators(listActions, appContext.dispatch) as unknown as ListActions,
@@ -32,19 +31,21 @@ const Layout: FC = (): ReactElement => {
 
     const onListCreated = async (list: TodoList) => {
         const newList = await actions.lists.save(list);
-        navigate(`/lists/${newList.id}`);
+        appContext.updateListId(`${newList.id}`);
     }
 
     const onItemEdited = (item: TodoItem) => {
         actions.items.save(item.listId, item);
         actions.items.select(undefined);
-        navigate(`/lists/${item.listId}`);
+        appContext.updateListId(`${item.listId}`)
+        appContext.updateItemId("");
     }
 
     const onItemEditCancel = () => {
         if (appContext.state.selectedList) {
             actions.items.select(undefined);
-            navigate(`/lists/${appContext.state.selectedList.id}`);
+            appContext.updateListId(`${appContext.state.selectedList.id}`);
+            appContext.updateItemId("");
         }
     }
 
@@ -62,10 +63,7 @@ const Layout: FC = (): ReactElement => {
                 </Stack.Item>
                 <Stack.Item grow={1} styles={mainStackStyles}>
                     <Routes>
-                        <Route path="/lists/:listId/items/:itemId" element={<HomePage />} />
-                        <Route path="/lists/:listId" element={<HomePage />} />
-                        <Route path="/lists" element={<HomePage />} />
-                        <Route path="/" element={<HomePage />} />
+                        <Route path="/" element={ <HomePage /> } />
                     </Routes>
                 </Stack.Item>
                 <Stack.Item styles={sidebarStackStyles}>
