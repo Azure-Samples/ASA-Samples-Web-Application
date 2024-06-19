@@ -4,18 +4,21 @@ languages:
 - azdeveloper
 - java
 - bicep
+- typescript
+- html
 products:
 - azure
 - azure-spring-apps
-- azure-postgresql
+- azure-database-postgresql
 - azure-key-vault
 - azure-pipelines
 - ms-build-openjdk
-urlFragment: todo-java-postgresql-asa
+urlFragment: ASA-Samples-Web-Application
 name: React Web App with Java API and PostgreSQL - Flexible Server on Azure Spring Apps
 description: A complete ToDo app on Azure Spring Apps with Java API and Azure Database for PostgreSQL flexible server for storage. Uses Azure Developer CLI (azd) to build, deploy, and run
 ---
 <!-- YAML front-matter schema: https://review.learn.microsoft.com/en-us/help/contribute/samples/process/onboarding?branch=main#supported-metadata-fields-for-readmemd -->
+
 # React Web App with Java API and PostgreSQL - Flexible Server on Azure Spring Apps
 
 A blueprint for getting a React web app with a Java API and a PostgreSQL - Flexible Server on Azure. The blueprint includes sample application code (a ToDo web app) which can be removed and replaced with your own application code. Add your own source code and leverage the Infrastructure as Code assets (written in Bicep) to get up and running quickly. This architecture is for running containerized apps or microservices on a serverless platform.
@@ -25,6 +28,14 @@ Let's jump in and get this up and running in Azure. When you are finished, you w
 !["Screenshot of deployed ToDo app"](assets/web.png)
 
 <sup>Screenshot of the deployed ToDo app</sup>
+
+Before delving into the step-by-step execution of the application, you can simply click the Deploy to Azure button. This will instantly deploy the app to Azure Spring Apps.
+
+| Deploy to Azure Spring Apps | |
+|--|--|
+| Consumption plan|[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure-Samples%2FASA-Samples-Web-Application%2Fquickstart%2Finfra%2Fazuredeploy-asa-consumption.json)|
+| Basic/Standard plan|[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure-Samples%2FASA-Samples-Web-Application%2Fquickstart%2Finfra%2Fazuredeploy-asa-standard.json)|
+| Enterprise plan|[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure-Samples%2FASA-Samples-Web-Application%2Fquickstart%2Finfra%2Fazuredeploy-asa-enterprise.json)|
 
 ### Prerequisites
 
@@ -57,6 +68,14 @@ azd init --template Azure-Samples/ASA-Samples-Web-Application
 # Provision and deploy to Azure
 azd up
 ```
+
+The template uses Azure Spring Apps [Standard consumption and dedicated plan](https://learn.microsoft.com/azure/spring-apps/overview#standard-consumption-and-dedicated-plan) by default. If you want to switch to `Standard` plan, you can use the following command before running `azd up`.
+
+```bash
+azd env set PLAN standard
+```
+
+If you have already provisioned the resources with the Standard consumption and dedicated plan and want to try the Standard plan, you need to run `azd down` first to delete the resources, and then run the above command and `azd up` again to provision and deploy.
 
 ### Application Architecture
 

@@ -4,12 +4,12 @@
   <parent>
     <groupId>com.microsoft.azure.simpletodo</groupId>
     <artifactId>simple-todo-parent</artifactId>
-    <version>0.0.2-SNAPSHOT</version>
+    <version>0.0.3-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
 
   <artifactId>simple-todo-client</artifactId>
-  <version>0.0.2-SNAPSHOT</version>
+  <version>0.0.3-SNAPSHOT</version>
   <name>SimpleTodo Client</name>
   <description>Simple Todo application - Client</description>
 
